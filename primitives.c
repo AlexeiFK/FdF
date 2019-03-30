@@ -6,7 +6,7 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/29 21:31:53 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/03/29 22:14:33 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/03/30 15:50:03 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ t_dot	*create_dot(int x, int y)
 	if (!(dot = (t_dot*)malloc(sizeof(t_dot))))
 		return (NULL);
 	dot->x = x;
-	dot->x = y;
+	dot->y = y;
 	return (dot);
 }
 
