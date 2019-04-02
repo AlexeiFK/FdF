@@ -6,12 +6,12 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/29 21:31:53 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/03/30 15:50:03 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/04/02 22:29:00 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "Fdf.h"
+#include "fdf.h"
 
 t_line	*create_line(int start_x, int start_y, int end_x, int end_y)
 {
@@ -39,7 +39,7 @@ t_line	*create_line_d(t_dot *start_dot, t_dot *end_dot)
 	return (line);
 }
 
-t_dot	*create_dot(int x, int y)
+t_dot	*create_dot(int x, int y, int z, int color)
 {
 	t_dot		*dot;
 
@@ -47,11 +47,42 @@ t_dot	*create_dot(int x, int y)
 		return (NULL);
 	dot->x = x;
 	dot->y = y;
+	dot->z = z;
+	dot->color = color;
+	dot->next = NULL;
 	return (dot);
 }
 
-void	free_dot(t_line *line)
+void	add_dot(t_dot **dot, t_dot *new)
 {
+	if (!dot || !new)
+		return ;
+	new->next = *dot;
+	*dot = new;
+}
+
+void	iter_dot(t_dot *dot, void (*f)(t_dot *elem))
+{
+	while (dot)
+	{
+		(*f)(dot);
+		dot = dot->next;
+	}
+}
+
+void	free_dot(t_dot **dot)
+{
+	t_dot	*tmp;
+	t_dot	*dtr;
+
+	dtr = *dot;
+	while (dtr)
+	{
+		tmp = dtr->next;
+		free(dtr);
+		dtr = tmp;
+	}
+	*dot = NULL;
 }
 
 void	free_line(t_dot *dot)

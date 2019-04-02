@@ -6,20 +6,32 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/26 22:33:58 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/03/30 17:52:35 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/04/02 23:11:55 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mlx.h"
 #include <math.h>
-#include "Fdf.h"
+#include "fdf.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include "libft.h"
 
 void	print_dot(t_dot *dot)
 {
-	printf("x = %d y = %d\n", dot->x, dot->y);
+	printf("x = %d y = %d z = %d color = %x\n",
+		   	dot->x, dot->y, dot->z, dot->color);
+}
+
+void	put_dot(t_dot *dot, void *param)
+{
+	void	**params = (void**)param;
+
+	while (dot)
+	{
+		mlx_string_put(params[0], params[1], dot->x * 30, dot->y * 30, dot->color, ft_itoa(dot->z));
+		dot = dot->next;
+	}
 }
 
 int		do_smth(int keycode, void *param)
@@ -58,8 +70,8 @@ int		m_draw(int buttom, int x, int y, void *param)
 	}
 	else
 	{
-		dot1 = create_dot(p_x, p_y);
-		dot2 = create_dot(x, y);
+		dot1 = create_dot(p_x, p_y, 0, 0);
+		dot2 = create_dot(x, y, 0, 0);
 		draw_line_p(param, dot1, dot2, color);
 		p_x = x;
 		p_y = y;
@@ -69,47 +81,29 @@ int		m_draw(int buttom, int x, int y, void *param)
 	return (0);
 }
 
-int		main(void)
+int		main(int argc, char **argv)
 {
 	void	*mlx_ptr;
 	void	*win_ptr;
 	t_line	*line;
 	t_dot	*dots[5];
 	void	*param[2];
+	t_dot	*list;
 
-
+	if (argc != 2)
+	{
+		ft_putstr("usage:\n");
+	}
+	list = ft_reader(argv[1]);
+	printf("SEG!\n");
+	iter_dot(list, print_dot);
 	mlx_ptr = mlx_init();
 	win_ptr = mlx_new_window(mlx_ptr, 500, 500, "FdF");
 	param[0] = mlx_ptr;
 	param[1] = win_ptr;
-	/*
-	dots[0] = create_dot(65, 450);
-	dots[1] = create_dot(250, 35);
-	dots[2] = create_dot(435, 450);
-	dots[3] = create_dot(30, 180);
-	dots[4] = create_dot(470, 180);
-	draw_line_p(param, dots[0], dots[1], 0xFFFFFF);
-	draw_line_p(param, dots[1], dots[2], 0xFFFFFF);
-	draw_line_p(param, dots[2], dots[3], 0xFFFFFF);
-	draw_line_p(param, dots[3], dots[4], 0xFFFFFF);
-	draw_line_p(param, dots[4], dots[0], 0xFFFFFF);
-	*/
-//	mlx_loop(mlx_ptr);
+	put_dot(list, param);
 	mlx_key_hook(win_ptr, do_smth, param);
 	mlx_mouse_hook(win_ptr, m_draw, param);
-//	mlx_hook(win_ptr, 2, 0, do_smth, (void*)0);
-	/*
-	line = create_line_d(dots[0], dots[1]);
-	draw_line(mlx_ptr, win_ptr, line, 0xFFFFFF);
-	line = create_line_d(dots[1], dots[2]);
-	draw_line(mlx_ptr, win_ptr, line, 0xFFFFFF);
-	line = create_line_d(dots[2], dots[3]);
-	draw_line(mlx_ptr, win_ptr, line, 0xFFFFFF);
-	line = create_line_d(dots[3], dots[4]);
-	draw_line(mlx_ptr, win_ptr, line, 0xFFFFFF);
-	line = create_line_d(dots[4], dots[0]);
-	draw_line(mlx_ptr, win_ptr, line, 0xFFFFFF);
-	*/
 	mlx_loop(mlx_ptr);
 	return (0);
 }

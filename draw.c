@@ -6,14 +6,14 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/29 21:36:57 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/03/30 16:56:12 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/04/02 21:48:20 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "mlx.h"
 #include <math.h>
-#include "Fdf.h"
+#include "fdf.h"
 
 static void	get_inc_n_max(t_line *line, float *inc_x, float *inc_y, float *n_pixels)
 {
