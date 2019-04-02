@@ -6,7 +6,7 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/29 21:36:57 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/04/02 21:48:20 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/04/02 23:28:56 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <math.h>
 #include "fdf.h"
 
+/*
 static void	get_inc_n_max(t_line *line, float *inc_x, float *inc_y, float *n_pixels)
 {
 	float		dif_x;
@@ -40,6 +41,7 @@ static void	get_inc_n_max(t_line *line, float *inc_x, float *inc_y, float *n_pix
 		*n_pixels = fabsf(dif_x);
 	}
 }
+*/
 
 static int	get_inc_n_maxp(t_dot *dot1, t_dot *dot2, float *inc_x, float *inc_y)
 {
@@ -66,7 +68,7 @@ static int	get_inc_n_maxp(t_dot *dot1, t_dot *dot2, float *inc_x, float *inc_y)
 		return (fabsf(dif_x));
 	}
 }
-
+/*
 void		draw_line(void *mlx_ptr, void *win_ptr, t_line *line, int color)
 {
 	float		inc_x;
@@ -87,6 +89,7 @@ void		draw_line(void *mlx_ptr, void *win_ptr, t_line *line, int color)
 		n_pixels--;
 	}
 }
+*/
 
 void		draw_line_p(void **param, t_dot *dot1, t_dot *dot2, int color)
 {

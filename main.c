@@ -6,7 +6,7 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/26 22:33:58 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/04/02 23:11:55 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/04/02 23:32:41 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int		main(int argc, char **argv)
 {
 	void	*mlx_ptr;
 	void	*win_ptr;
-	t_line	*line;
+//	t_line	*line;
 	t_dot	*dots[5];
 	void	*param[2];
 	t_dot	*list;

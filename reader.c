@@ -6,7 +6,7 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 19:40:40 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/04/02 23:00:11 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/04/02 23:33:28 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,6 @@ t_dot	*ft_reader(char *filename)
 	int		ret;
 	t_dot	*dots;
 
-	printf("iner\n");
-	printf("iner\n");
 	fd = open(filename, O_RDONLY);
 	while (get_next_line(fd, &str) > 0)
 	{
