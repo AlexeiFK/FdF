@@ -6,7 +6,7 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/26 22:33:58 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/04/02 23:32:41 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/04/04 21:21:57 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,15 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "libft.h"
+#include "config.h"
 
+/*
 void	print_dot(t_dot *dot)
 {
 	printf("x = %d y = %d z = %d color = %x\n",
 		   	dot->x, dot->y, dot->z, dot->color);
 }
-
+*/
 void	put_dot(t_dot *dot, void *param)
 {
 	void	**params = (void**)param;
@@ -36,14 +38,28 @@ void	put_dot(t_dot *dot, void *param)
 
 int		do_smth(int keycode, void *param)
 {
-/*	static int	x = 0;
-	static int	y = 0;
 	void	**params = (void**)param;
-	mlx_pixel_put(params[0], params[1], x, y, 0xFFFFFF);
-	x++;
-	y++;
-	*/
-	if (keycode == 53)
+
+//	printf("_______________________________%d\n", keycode);
+	if (keycode == UP || keycode == WKEY)
+		sh_net_dot(params[2], param, 0, -SENS_VERT);
+	if (keycode == DOWN || keycode == SKEY)
+		sh_net_dot(params[2], param, 0, SENS_VERT);
+	if (keycode == RIGHT || keycode == DKEY)
+		sh_net_dot(params[2], param, SENS_HOR, 0);
+	if (keycode == LEFT || keycode == AKEY)
+		sh_net_dot(params[2], param, -SENS_HOR, 0);
+	if (keycode == QKEY)
+		ag_net_dot(param, M_PI / 20, 0, 0);
+//		zm_net_dot(param, 1.1, WINDOW_WIDTH / 2, WINDOW_HEIGTH / 2);
+	if (keycode == EKEY)
+		ag_net_dot(param, M_PI / 20 * (-1), 0, 0);
+	//	zm_net_dot(param, 0.9, WINDOW_WIDTH / 2, WINDOW_HEIGTH / 2);
+	if (keycode == ZKEY)
+		ag_net_dot(param, M_PI / 20, WINDOW_WIDTH / 2, WINDOW_HEIGTH / 2);
+	if (keycode == CKEY)
+		ag_net_dot(param, M_PI / 20 * (-1), WINDOW_WIDTH / 2, WINDOW_HEIGTH / 2);
+	if (keycode == ESC)
 		exit(0);
 	return (0);
 }
@@ -62,7 +78,16 @@ int		m_draw(int buttom, int x, int y, void *param)
 		color = 0x00FF00;
 	if (buttom == 3)
 		color = 0xFFFF00;
-//	printf("buttom = %d\n", buttom);
+	if (buttom == 4)
+	{
+		zm_net_dot(param, SENS_ZOOM_IN, x, y);
+		return (0);
+	}
+	if (buttom == 5)
+	{
+		zm_net_dot(param, SENS_ZOOM_OUT, x, y);
+		return (0);
+	}
 	if (p_x == -1)
 	{
 		p_x = x;
@@ -87,21 +112,30 @@ int		main(int argc, char **argv)
 	void	*win_ptr;
 //	t_line	*line;
 	t_dot	*dots[5];
-	void	*param[2];
+	void	*param[3];
 	t_dot	*list;
+	t_dot	*list2;
 
 	if (argc != 2)
 	{
 		ft_putstr("usage:\n");
+		return (0);
 	}
 	list = ft_reader(argv[1]);
-	printf("SEG!\n");
-	iter_dot(list, print_dot);
+//	iter_dot(list, print_dot);
+	list2 = ft_cpy(list);
 	mlx_ptr = mlx_init();
-	win_ptr = mlx_new_window(mlx_ptr, 500, 500, "FdF");
+	win_ptr = mlx_new_window(mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGTH, "FdF");
 	param[0] = mlx_ptr;
 	param[1] = win_ptr;
-	put_dot(list, param);
+	param[2] = list;
+//	put_dot(list, param);
+	zoom_z(list, 30);
+	shift(list, 0, 0);
+	net_dot(list, param);
+//	zoom(list2, 20);
+//	shift(list2, 20, 200);
+//	net_dot(list2, param);
 	mlx_key_hook(win_ptr, do_smth, param);
 	mlx_mouse_hook(win_ptr, m_draw, param);
 	mlx_loop(mlx_ptr);
