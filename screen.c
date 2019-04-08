@@ -14,9 +14,8 @@
 #include "mlx.h"
 #include "config.h"
 
-static void	put_vert(t_dot *dot, void *param, int rows)
+static void	put_vert(t_dot *dot, t_param *param, int rows)
 {
-	void	**params = (void**)param;
 	t_dot	*dotp;
 
 	dotp = dot;
@@ -41,12 +40,13 @@ static int	out_of_window(t_dot *dot1, t_dot *dot2)
 	return (0);
 }
 
-void		net_dot(t_dot *dot, void *param)
+void		net_dot(t_param *param)
 {
-	void	**params = (void**)param;
 	t_dot	*tmp;
 	int		n_rows;
+	t_dot	*dot;
 
+	dot = param->dot;
 	n_rows = 1;
 	tmp = dot;
 	while (dot->next)
@@ -66,43 +66,8 @@ void		net_dot(t_dot *dot, void *param)
 	put_vert(tmp, param, n_rows);
 }
 
-void	put_dots(t_dot *dot, void *param)
+void	clear_and_rest(t_param *param)
 {
-	void	**params = (void**)param;
-
-	while (dot)
-	{
-		mlx_pixel_put(params[0], params[1], dot->x, dot->y, 0xFFFFFF);
-		dot = dot->next;
-	}
-}
-
-void	sh_net_dot(t_dot *dot, void *param, int x, int y)
-{
-	void	**params = (void**)param;
-
-	mlx_clear_window(params[0], params[1]);
-	shift(dot, x, y);
-//	put_dots(params[2], param);
-	net_dot(dot, param);
-}
-
-void	zm_net_dot(void *param, float mult, int x, int y)
-{
-	void	**params = (void**)param;
-
-	mlx_clear_window(params[0], params[1]);
-	zoom(params[2], mult, x, y);
-//	put_dots(params[2], param);
-	net_dot(params[2], param);
-}
-
-void	ag_net_dot(void *param, float angle, int x, int y)
-{
-	void	**params = (void**)param;
-
-	mlx_clear_window(params[0], params[1]);
-	conv(params[2], angle, x, y);
-//	put_dots(params[2], param);
-	net_dot(params[2], param);
+	mlx_clear_window(param->mlx_ptr, param->win_ptr);
+	draw_menu(param, 0); //add color
 }

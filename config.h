@@ -13,8 +13,11 @@
 #ifndef CONFIG_H
 # define CONFIG_H
 
-# define WINDOW_HEIGTH 1000
-# define WINDOW_WIDTH 1500
+# define W_NAME "Fdf"
+# define WINDOW_HEIGTH 600
+# define WINDOW_WIDTH 1200
+# define WINDOW_H_C WINDOW_HEIGTH/2
+# define WINDOW_W_C WINDOW_WIDTH/2
 # define SENS_HOR 100
 # define SENS_VERT 100
 # define SENS_ZOOM_IN 1.1
@@ -27,10 +30,15 @@
 # define AKEY 0
 # define SKEY 1
 # define DKEY 2
-# define ESC 53
-# define QKEY 12
-# define EKEY 14
-# define ZKEY 6
+# define ESC 49
+# define QKEY 50
+# define EKEY 51
+# define ZKEY 52
+# define KKEY 53
+# define LKEY 54
+# define OKEY 55
+# define VKEY 118
+# define BKEY 98
 # define CKEY 8
 
 #endif

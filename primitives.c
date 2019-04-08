@@ -13,33 +13,6 @@
 #include <stdlib.h>
 #include "fdf.h"
 
-/*
-t_line	*create_line(int start_x, int start_y, int end_x, int end_y)
-{
-	t_line		*line;
-
-	if (!(line = (t_line*)malloc(sizeof(t_line))))
-		return (NULL);
-	line->x1 = start_x;
-	line->y1 = start_y;
-	line->x2 = end_x;
-	line->y2 = end_y;
-	return (line);
-}
-
-t_line	*create_line_d(t_dot *start_dot, t_dot *end_dot)
-{
-	t_line		*line;
-
-	if (!(line = (t_line*)malloc(sizeof(t_line))))
-		return (NULL);
-	line->x1 = start_dot->x;
-	line->y1 = start_dot->y;
-	line->x2 = end_dot->x;
-	line->y2 = end_dot->y;
-	return (line);
-}
-*/
 t_dot	*create_dot(int x, int y, int z, int color)
 {
 	t_dot		*dot;

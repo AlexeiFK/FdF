@@ -18,126 +18,73 @@
 #include "libft.h"
 #include "config.h"
 
-/*
-void	print_dot(t_dot *dot)
-{
-	printf("x = %d y = %d z = %d color = %x\n",
-		   	dot->x, dot->y, dot->z, dot->color);
-}
-*/
-void	put_dot(t_dot *dot, void *param)
-{
-	void	**params = (void**)param;
 
-	while (dot)
+static void	find_x_y(t_dot *dot, int *x, int *y)
+{
+	*x = dot->x;
+	*y = dot->y;
+	while (dot->next)
 	{
-		mlx_string_put(params[0], params[1], dot->x * 30, dot->y * 30, dot->color, ft_itoa(dot->z));
+		//max
 		dot = dot->next;
 	}
 }
 
-int		do_smth(int keycode, void *param)
+void		test123(t_dot *dot)
 {
-	void	**params = (void**)param;
-
-//	printf("_______________________________%d\n", keycode);
-	if (keycode == UP || keycode == WKEY)
-		sh_net_dot(params[2], param, 0, -SENS_VERT);
-	if (keycode == DOWN || keycode == SKEY)
-		sh_net_dot(params[2], param, 0, SENS_VERT);
-	if (keycode == RIGHT || keycode == DKEY)
-		sh_net_dot(params[2], param, SENS_HOR, 0);
-	if (keycode == LEFT || keycode == AKEY)
-		sh_net_dot(params[2], param, -SENS_HOR, 0);
-	if (keycode == QKEY)
-		ag_net_dot(param, M_PI / 20, 0, 0);
-//		zm_net_dot(param, 1.1, WINDOW_WIDTH / 2, WINDOW_HEIGTH / 2);
-	if (keycode == EKEY)
-		ag_net_dot(param, M_PI / 20 * (-1), 0, 0);
-	//	zm_net_dot(param, 0.9, WINDOW_WIDTH / 2, WINDOW_HEIGTH / 2);
-	if (keycode == ZKEY)
-		ag_net_dot(param, M_PI / 20, WINDOW_WIDTH / 2, WINDOW_HEIGTH / 2);
-	if (keycode == CKEY)
-		ag_net_dot(param, M_PI / 20 * (-1), WINDOW_WIDTH / 2, WINDOW_HEIGTH / 2);
-	if (keycode == ESC)
-		exit(0);
-	return (0);
+	while (dot)
+	{
+		printf("x = %f, y = %f\n", dot->x, dot->y);
+		dot = dot->next;
+	}
 }
 
-int		m_draw(int buttom, int x, int y, void *param)
+static void	standard_placement(t_param *param)
 {
-	void	**params = (void**)param;
-	t_dot		*dot1;
-	t_dot		*dot2;
-	static int	p_x = -1;
-	static int	p_y = -1;
-	int			color;
-	if (buttom == 2)
-		color = 0xFF0000;
-	if (buttom == 1)
-		color = 0x00FF00;
-	if (buttom == 3)
-		color = 0xFFFF00;
-	if (buttom == 4)
-	{
-		zm_net_dot(param, SENS_ZOOM_IN, x, y);
-		return (0);
-	}
-	if (buttom == 5)
-	{
-		zm_net_dot(param, SENS_ZOOM_OUT, x, y);
-		return (0);
-	}
-	if (p_x == -1)
-	{
-		p_x = x;
-		p_y = y;
-	}
+	int	x;
+	int	y;
+	int	shx;
+	int	shy;
+	int	min;
+
+	find_x_y(param->dot, &x, &y);
+	if (((WINDOW_WIDTH - 150) / y) > ((WINDOW_HEIGTH - 150) / x))
+		min = (WINDOW_HEIGTH - 150) / x;
 	else
-	{
-		dot1 = create_dot(p_x, p_y, 0, 0);
-		dot2 = create_dot(x, y, 0, 0);
-		draw_line_p(param, dot1, dot2, color);
-		p_x = x;
-		p_y = y;
-		free(dot1); //
-		free(dot2); //
-	}
-	return (0);
+		min = (WINDOW_WIDTH - 150) / y;
+	zoom_z(param->dot, min, 5);
+	zoom_z(param->res, min, 5);
+	shx = (WINDOW_WIDTH / 2) - (x * min / 2);
+	shy = (WINDOW_HEIGTH / 2) - (y * min / 2);
+	shift(param->dot, shx, shy, 0);
+	shift(param->res, shx, shy, 0);
+	net_dot(param);
+	draw_menu(param, 0xFFFFFF);
+}
+
+static void	mlx_setup(char *filename, t_param *param)
+{
+	param->res = NULL;
+
+	param->dot = ft_reader(filename);
+	ft_cpy(&(param->res), param->dot);
+	param->mlx_ptr = mlx_init();
+	param->win_ptr = mlx_new_window(param->mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGTH, W_NAME);
 }
 
 int		main(int argc, char **argv)
 {
-	void	*mlx_ptr;
-	void	*win_ptr;
-//	t_line	*line;
-	t_dot	*dots[5];
-	void	*param[3];
-	t_dot	*list;
-	t_dot	*list2;
+	t_param param;
 
 	if (argc != 2)
 	{
 		ft_putstr("usage:\n");
 		return (0);
 	}
-	list = ft_reader(argv[1]);
-//	iter_dot(list, print_dot);
-	list2 = ft_cpy(list);
-	mlx_ptr = mlx_init();
-	win_ptr = mlx_new_window(mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGTH, "FdF");
-	param[0] = mlx_ptr;
-	param[1] = win_ptr;
-	param[2] = list;
-//	put_dot(list, param);
-	zoom_z(list, 30);
-	shift(list, 0, 0);
-	net_dot(list, param);
-//	zoom(list2, 20);
-//	shift(list2, 20, 200);
-//	net_dot(list2, param);
-	mlx_key_hook(win_ptr, do_smth, param);
-	mlx_mouse_hook(win_ptr, m_draw, param);
-	mlx_loop(mlx_ptr);
+	mlx_setup(argv[1], &param);
+	standard_placement(&param);
+	mlx_key_hook(param.win_ptr, keyboard_f, (void*)(&param));
+	mlx_mouse_hook(param.win_ptr, mouse_f, (void*)(&param));
+	mlx_loop(param.mlx_ptr);
 	return (0);
 }

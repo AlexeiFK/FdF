@@ -33,19 +33,18 @@ void	str_to_dots(char **split, t_dot **dots)
 	col++;
 }
 
-t_dot	*ft_cpy(t_dot *dot)
+void	ft_cpy(t_dot **new, t_dot *dot)
 {
 	t_dot	*tmp;
-	t_dot	*new;
 
 	while (dot)
 	{
 		tmp = create_dot(dot->x, dot->y, dot->z, dot->color);
 		tmp->row = dot->row;
-		add_dot(&new, tmp);
+		add_dot(new, tmp);
+//		free(tmp);
 		dot = dot->next;
 	}
-	return (new);
 }
 
 t_dot	*ft_reader(char *filename)
@@ -56,6 +55,7 @@ t_dot	*ft_reader(char *filename)
 	int		ret;
 	t_dot	*dots;
 
+	dots = NULL;
 	fd = open(filename, O_RDONLY);
 	while (get_next_line(fd, &str) > 0)
 	{
