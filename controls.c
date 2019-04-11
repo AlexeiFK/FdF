@@ -9,13 +9,13 @@ int		keyboard_f(int keycode, void *param)
 {
 //	printf("_______________________________%d\n", keycode);
 	if (keycode == UP || keycode == WKEY)
-		sh_net_dot(param, 0, -SENS_VERT, 0);
-	if (keycode == DOWN || keycode == SKEY)
 		sh_net_dot(param, 0, SENS_VERT, 0);
+	if (keycode == DOWN || keycode == SKEY)
+		sh_net_dot(param, 0, -SENS_VERT, 0);
 	if (keycode == RIGHT || keycode == DKEY)
-		sh_net_dot(param, SENS_HOR, 0, 0);
-	if (keycode == LEFT || keycode == AKEY)
 		sh_net_dot(param, -SENS_HOR, 0, 0);
+	if (keycode == LEFT || keycode == AKEY)
+		sh_net_dot(param, SENS_HOR, 0, 0);
 	if (keycode == VKEY)
 		sh_net_dot(param, 0, 0, 20);
 	if (keycode == BKEY)
@@ -65,6 +65,7 @@ void		menu_handler(void *param, int x, int y)
 	if (x > 1 && x < 101 && y > 290 && y < 310)
 	{
 		new_net_dot(param);
+		clear_and_rest(param);
 		rot_net_dot(param, 0 , 'i');
 	}
 	if (x > 1 && x < 101 && y > 310 && y < 330)
@@ -95,13 +96,13 @@ int		mouse_f(int buttom, int x, int y, void *param)
 	if (buttom == 1)
 	{
 		if (x > 1 && x < 101 && y > 25 && y < 55)
-			sh_net_dot(param, 0, -SENS_VERT, 0);
-		if (x > 51 && x < 101 && y > 55 && y < 85)
-			sh_net_dot(param, SENS_HOR, 0, 0);
-		if (x > 1 && x < 50 && y > 55 && y < 85)
-			sh_net_dot(param, -SENS_HOR, 0, 0);
-		if (x > 1 && x < 101 && y > 85 && y < 115)
 			sh_net_dot(param, 0, SENS_VERT, 0);
+		if (x > 51 && x < 101 && y > 55 && y < 85)
+			sh_net_dot(param, -SENS_HOR, 0, 0);
+		if (x > 1 && x < 50 && y > 55 && y < 85)
+			sh_net_dot(param, SENS_HOR, 0, 0);
+		if (x > 1 && x < 101 && y > 85 && y < 115)
+			sh_net_dot(param, 0, -SENS_VERT, 0);
 		if (x > 1 && x < 101 && y > 155 && y < 180)
 			zm_net_dot(param, SENS_ZOOM_IN, WINDOW_W_C, WINDOW_H_C);
 		if (x > 1 && x < 101 && y > 180 && y < 205)
