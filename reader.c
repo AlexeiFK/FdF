@@ -15,17 +15,32 @@
 #include "fdf.h"
 #include "get_next_line.h"
 
-void	str_to_dots(char **split, t_dot **dots)
+void	str_to_dots(char **split, t_dot **dots, t_colors *c)
 {
 	static int	col = 0;
 	int			x;
 	int			i;
 	t_dot		*tmp;
+	int		color_flag;
 
 	x = 0;
+	if (c == NULL)
+		color_flag = 0;
+	else
+		color_flag = 1;
 	while (split[x] != NULL)
 	{
-		tmp = create_dot(x, col, ft_atoi(split[x]), 0xFFFFFF);
+		if (color_flag)
+		{
+			if (ft_atoi(split[x]) == 0)
+				tmp = create_dot(x, col, ft_atoi(split[x]), strtol(c->mid, NULL, 16));
+			else if (ft_atoi(split[x]) > 0)
+				tmp = create_dot(x, col, ft_atoi(split[x]), strtol(c->top, NULL, 16));
+			else if (ft_atoi(split[x]) < 0)
+				tmp = create_dot(x, col, ft_atoi(split[x]), strtol(c->bot, NULL, 16));
+		}
+		else
+			tmp = create_dot(x, col, ft_atoi(split[x]), 0xFFFFFF);
 		tmp->row = col;
 		add_dot(dots, tmp);
 		x++;
@@ -47,7 +62,7 @@ void	ft_cpy(t_dot **new, t_dot *dot)
 	}
 }
 
-t_dot	*ft_reader(char *filename)
+t_dot	*ft_reader(char *filename, t_colors *colors)
 {
 	int		fd;
 	char	*str;
@@ -61,7 +76,7 @@ t_dot	*ft_reader(char *filename)
 	{
 		split = ft_strsplit(str, ' ');
 		free(str);
-		str_to_dots(split, &dots);
+		str_to_dots(split, &dots, colors);
 		free(split); // normalnii free dlya char**
 	}
 	return (dots);

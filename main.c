@@ -39,7 +39,7 @@ void		test123(t_dot *dot)
 	}
 }
 
-static void	standard_placement(t_param *param)
+static void	standard_placement(t_param *param, int zmult, t_colors *color)
 {
 	int	x;
 	int	y;
@@ -52,8 +52,8 @@ static void	standard_placement(t_param *param)
 		min = (WINDOW_HEIGTH - 150) / x;
 	else
 		min = (WINDOW_WIDTH - 150) / y;
-	zoom_z(param->dot, min, 5);
-	zoom_z(param->res, min, 5);
+	zoom_z(param->dot, min, zmult);
+	zoom_z(param->res, min, zmult);
 	shx = (WINDOW_WIDTH / 2) - (x * min / 2);
 	shy = (WINDOW_HEIGTH / 2) - (y * min / 2);
 	shift(param->dot, shx, shy, 0);
@@ -62,27 +62,45 @@ static void	standard_placement(t_param *param)
 	draw_menu(param, 0xFFFFFF);
 }
 
-static void	mlx_setup(char *filename, t_param *param)
+static void	mlx_setup(char *filename, t_param *param, t_colors *colors)
 {
 	param->res = NULL;
 
-	param->dot = ft_reader(filename);
+	if (colors->top != NULL)
+		param->dot = ft_reader(filename, colors);
+	else
+		param->dot = ft_reader(filename, NULL);
 	ft_cpy(&(param->res), param->dot);
+	param->clr = colors;
 	param->mlx_ptr = mlx_init();
 	param->win_ptr = mlx_new_window(param->mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGTH, W_NAME);
 }
 
+static void	usage_msg(void)
+{
+	ft_putstr("usage: ./fdf [filename] [color_bot] ");
+	ft_putstr("[color_mid] [color_top]\n");
+	exit(0);
+}
+
 int		main(int argc, char **argv)
 {
-	t_param param;
+	t_param 	param;
+	t_colors	colors;
 
-	if (argc != 2)
+	colors.bot = NULL;
+	colors.mid = NULL;
+	colors.top = NULL;
+	if (argc != 2 && argc != 5)
+		usage_msg();
+	if (argc == 5)
 	{
-		ft_putstr("usage:\n");
-		return (0);
+		colors.bot = argv[2];
+		colors.mid = argv[3];
+		colors.top = argv[4];
 	}
-	mlx_setup(argv[1], &param);
-	standard_placement(&param);
+	mlx_setup(argv[1], &param, &colors);
+	standard_placement(&param, AT_MULT, &colors);
 	mlx_key_hook(param.win_ptr, keyboard_f, (void*)(&param));
 	mlx_mouse_hook(param.win_ptr, mouse_f, (void*)(&param));
 	mlx_loop(param.mlx_ptr);

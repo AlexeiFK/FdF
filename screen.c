@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "fdf.h"
 #include "mlx.h"
 #include "config.h"
@@ -26,7 +27,7 @@ static void	put_vert(t_dot *dot, t_param *param, int rows)
 	}
 	while (dotp)
 	{
-		draw_line_p(param, dot, dotp, dot->color);	//color
+		draw_line_p(param, dot, dotp);	//color
 		dot = dot->next;
 		dotp = dotp->next;
 	}
@@ -54,7 +55,7 @@ void		net_dot(t_param *param)
 		if (dot->row == dot->next->row)
 		{
 			if (!out_of_window(dot, dot->next))
-				draw_line_p(param, dot, dot->next, dot->color); //color
+				draw_line_p(param, dot, dot->next); //color
 			n_rows++;
 		}
 		else
@@ -69,5 +70,5 @@ void		net_dot(t_param *param)
 void	clear_and_rest(t_param *param)
 {
 	mlx_clear_window(param->mlx_ptr, param->win_ptr);
-	draw_menu(param, 0); //add color
+	draw_menu(param, 0xFFFFFF); //add color
 }

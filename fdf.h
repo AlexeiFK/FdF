@@ -25,17 +25,26 @@ typedef struct		s_dot
 	struct s_dot	*next;
 }					t_dot;
 
+typedef struct		s_colors
+{
+	char*		menu;
+	char*		top;
+	char*		mid;
+	char*		bot;
+}			t_colors;
+
 typedef struct		s_param
 {
 	void		*mlx_ptr;
 	void		*win_ptr;
 	t_dot		*dot;
 	t_dot		*res;
+	t_colors	*clr;
 }			t_param;
 
 t_dot		*create_dot(int x, int y, int z, int c);
 void		free_dot(t_dot **dot);
-t_dot		*ft_reader(char *filename);
+t_dot		*ft_reader(char *filename, t_colors *colors);
 void		add_dot(t_dot **dot, t_dot *new);
 void		ft_cpy(t_dot **dest, t_dot *src);
 
@@ -50,7 +59,7 @@ void		new_net_dot(t_param *param);
 void		sh_net_dot(t_param *param, int x, int y, int z);
 void		zm_net_dot(t_param *param, float mult, int x, int y);
 void		zx_net_dot(t_param *param, float mult);
-void		draw_line_p(t_param *param, t_dot *dot1, t_dot *dot2, int color);
+void		draw_line_p(t_param *param, t_dot *dot1, t_dot *dot2);
 
 void		clear_and_rest(t_param *param);
 void		draw_box(t_param *param, t_dot *dot1, t_dot *dot4, int color);

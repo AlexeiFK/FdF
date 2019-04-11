@@ -37,52 +37,56 @@ int		keyboard_f(int keycode, void *param)
 	return (0);
 }
 
+
+
 void		menu_handler(void *param, int x, int y)
 {
 	t_dot	*dot1;
 	t_dot	*dot2;
 
-	if (x > 1 && x < 101 && y > 25 && y < 55)
-	{
-		sh_net_dot(param, 0, -SENS_VERT, 0);
-		dot1 = create_dot(1, 25, 0, 0);
-		dot2 = create_dot(101, 55, 0, 0);
-		draw_box(param, dot1, dot2, 0xFF0000);
-	}
-	if (x > 51 && x < 101 && y > 55 && y < 85)
-	{
-		dot1 = create_dot(51, 55, 0, 0);
-		dot2 = create_dot(101, 85, 0, 0);
-		sh_net_dot(param, SENS_HOR, 0, 0);
-		draw_box(param, dot1, dot2, 0xFF0000);
-	}
-	if (x > 1 && x < 50 && y > 55 && y < 85)
-	{
-		dot1 = create_dot(1, 55, 0, 0);
-		dot2 = create_dot(50, 85, 0, 0);
-		sh_net_dot(param, -SENS_HOR, 0, 0);
-		draw_box(param, dot1, dot2, 0xFF0000);
-	}
-	if (x > 1 && x < 101 && y > 85 && y < 115)
-	{
-		dot1 = create_dot(1, 85, 0, 0);
-		dot2 = create_dot(101, 115, 0, 0);
-		sh_net_dot(param, 0, SENS_VERT, 0);
-		draw_box(param, dot1, dot2, 0xFF0000);
-	}
-	if (x > 1 && x < 101 && y > 270 && y < 290)
-	{
-		dot1 = create_dot(1, 270, 0, 0);
-		dot2 = create_dot(101, 290, 0, 0);
-		rot_net_dot(param, 0 , 'i');
-		draw_box(param, dot1, dot2, 0xFF0000);
-	}
+	if (x > 1 && x < 50 && y > 115 && y < 135)
+		zx_net_dot(param, 0.9);
+	if (x > 50 && x < 101 && y > 115 && y < 135)
+		zx_net_dot(param, 1.1);
+	if (x > 1 && x < 101 && y > 135 && y < 155)
+		zx_net_dot(param, -1);
+	if (x > 1 && x < 50 && y > 225 && y < 245)
+		rot_net_dot(param, -M_PI / 32 , 'x');
+	if (x > 1 && x < 50 && y > 245 && y < 265)
+		rot_net_dot(param, -M_PI / 32 , 'y');
+	if (x > 1 && x < 50 && y > 265 && y < 290)
+		rot_net_dot(param, -M_PI / 32 , 'z');
+	if (x > 50 && x < 101 && y > 225 && y < 245)
+		rot_net_dot(param, M_PI / 32 , 'x');
+	if (x > 50 && x < 101 && y > 245 && y < 265)
+		rot_net_dot(param, M_PI / 32 , 'y');
+	if (x > 50 && x < 101 && y > 265 && y < 290)
+		rot_net_dot(param, M_PI / 32 , 'z');
 	if (x > 1 && x < 101 && y > 290 && y < 310)
 	{
-		dot1 = create_dot(1, 270, 0, 0);
-		dot2 = create_dot(101, 290, 0, 0);
 		new_net_dot(param);
+		rot_net_dot(param, 0 , 'i');
+	}
+	if (x > 1 && x < 101 && y > 310 && y < 330)
+		new_net_dot(param);
+	if (x > 1 && x < 101 && y > 335 && y < 355)
+	{
+		dot1 = create_dot(1, 335, 0, 0);
+		dot2 = create_dot(101, 355, 0, 0);
 		draw_box(param, dot1, dot2, 0xFF0000);
+	}
+	if (x > 1 && x < 101 && y > 355 && y < 375)
+	{
+		dot1 = create_dot(1, 355, 0, 0);
+		dot2 = create_dot(101, 375, 0, 0);
+		draw_box(param, dot1, dot2, 0xFF0000);
+	}
+	if (x > 1 && x < 101 && y > 375 && y < 395)
+	{
+		dot1 = create_dot(1, 375, 0, 0);
+		dot2 = create_dot(101, 395, 0, 0);
+		draw_box(param, dot1, dot2, 0xFF0000);
+		exit(0);
 	}
 }
 
@@ -90,8 +94,19 @@ int		mouse_f(int buttom, int x, int y, void *param)
 {
 	if (buttom == 1)
 	{
+		if (x > 1 && x < 101 && y > 25 && y < 55)
+			sh_net_dot(param, 0, -SENS_VERT, 0);
+		if (x > 51 && x < 101 && y > 55 && y < 85)
+			sh_net_dot(param, SENS_HOR, 0, 0);
+		if (x > 1 && x < 50 && y > 55 && y < 85)
+			sh_net_dot(param, -SENS_HOR, 0, 0);
+		if (x > 1 && x < 101 && y > 85 && y < 115)
+			sh_net_dot(param, 0, SENS_VERT, 0);
+		if (x > 1 && x < 101 && y > 155 && y < 180)
+			zm_net_dot(param, SENS_ZOOM_IN, WINDOW_W_C, WINDOW_H_C);
+		if (x > 1 && x < 101 && y > 180 && y < 205)
+			zm_net_dot(param, SENS_ZOOM_OUT, WINDOW_W_C, WINDOW_H_C);
 		menu_handler(param, x, y);
-		return (0);
 	}
 	if (buttom == 4)
 		zm_net_dot(param, SENS_ZOOM_IN, x, y);

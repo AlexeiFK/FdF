@@ -13,15 +13,18 @@
 #ifndef CONFIG_H
 # define CONFIG_H
 
-# define W_NAME "Fdf"
+# define W_NAME "Fdf42"
 # define WINDOW_HEIGTH 600
 # define WINDOW_WIDTH 1200
+# define WINDOW_H_M 0
+# define WINDOW_W_M WINDOW_WIDTH-100
 # define WINDOW_H_C WINDOW_HEIGTH/2
 # define WINDOW_W_C WINDOW_WIDTH/2
 # define SENS_HOR 100
 # define SENS_VERT 100
 # define SENS_ZOOM_IN 1.1
 # define SENS_ZOOM_OUT 0.9
+# define AT_MULT 6
 # define UP 126
 # define LEFT 123
 # define DOWN 125
