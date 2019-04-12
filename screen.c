@@ -54,8 +54,8 @@ void		net_dot(t_param *param)
 	{
 		if (dot->row == dot->next->row)
 		{
-			if (!out_of_window(dot, dot->next))
-				draw_line_p(param, dot, dot->next); //color
+	//		if (!out_of_window(dot, dot->next))
+			draw_line_p(param, dot, dot->next); //color
 			n_rows++;
 		}
 		else

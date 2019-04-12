@@ -15,6 +15,13 @@
 
 #include <bsd/string.h>
 
+typedef struct			s_spec
+{
+	float	r;
+	float	g;
+	float	b;
+}				t_spec;
+
 typedef struct		s_dot
 {
 	float			x;
