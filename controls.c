@@ -109,6 +109,12 @@ int		mouse_f(int buttom, int x, int y, void *param)
 			zm_net_dot(param, SENS_ZOOM_OUT, WINDOW_W_C, WINDOW_H_C);
 		menu_handler(param, x, y);
 	}
+	if (buttom == 2)
+	{
+		t_dot *dot1 = create_dot(x, y, 0, 0x8000ff); 
+		t_dot *dot2 = create_dot(x + 200, y + 200, 0, 0x00ff00);
+		draw_line_p(param, dot1, dot2);
+	}
 	if (buttom == 4)
 		zm_net_dot(param, SENS_ZOOM_IN, x, y);
 	if (buttom == 5)
@@ -116,3 +122,18 @@ int		mouse_f(int buttom, int x, int y, void *param)
 	return (0);
 }
 
+int		hook_f(void *param)
+{
+	static  int	color1 = 0xFF00FF;
+	static  int	color2 = 0x00ff00;
+	static 	t_dot dot1;
+	static 	t_dot dot2;
+
+	dot1.color = color1;
+	dot2.color = color2;
+	dot1.y++;
+	dot2.x = WINDOW_WIDTH;
+	dot2.y++;
+	draw_line_p(param, &dot1, &dot2);
+	//net_dot(param);
+}

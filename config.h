@@ -25,6 +25,7 @@
 # define SENS_ZOOM_IN 1.1
 # define SENS_ZOOM_OUT 0.9
 # define AT_MULT 6
+# define COLOR_OPT 15
 # define UP 126
 # define LEFT 123
 # define DOWN 125

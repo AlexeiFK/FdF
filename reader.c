@@ -48,6 +48,18 @@ void	str_to_dots(char **split, t_dot **dots, t_colors *c)
 	col++;
 }
 
+void	ft_colorize(t_dot *dot, int max, int min)
+{
+	int	mid;
+
+	mid = (max + min) / 2;
+
+	while (dot)
+	{
+		dot = dot->next;
+	}
+}
+
 void	ft_cpy(t_dot **new, t_dot *dot)
 {
 	t_dot	*tmp;
