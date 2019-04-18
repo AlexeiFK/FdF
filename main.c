@@ -58,12 +58,15 @@ static void	standard_placement(t_param *param, int zmult, t_colors *color)
 	shy = (WINDOW_HEIGTH / 2) - (y * min / 2);
 	shift(param->dot, shx, shy, 0);
 	shift(param->res, shx, shy, 0);
-	net_dot(param);
+	net_dot_c(param);
+	mlx_put_image_to_window(param->mlx_ptr, param->win_ptr, param->img_ptr, 0, 0); // destroy and yatayatayta
 	draw_menu(param, 0xFFFFFF);
 }
 
 static void	mlx_setup(char *filename, t_param *param, t_colors *colors)
 {
+	int	bits;
+	int	endian;
 	param->res = NULL;
 
 	if (colors->top != NULL)
@@ -74,6 +77,8 @@ static void	mlx_setup(char *filename, t_param *param, t_colors *colors)
 	param->clr = colors;
 	param->mlx_ptr = mlx_init();
 	param->win_ptr = mlx_new_window(param->mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGTH, W_NAME);
+	param->img_ptr = mlx_new_image(param->mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGTH);
+	param->s = mlx_get_data_addr(param->img_ptr, &bits, &(param->size), &endian);
 }
 
 static void	usage_msg(void)
