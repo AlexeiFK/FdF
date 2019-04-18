@@ -77,18 +77,9 @@ void		menu_handler(void *param, int x, int y)
 		draw_box(param, dot1, dot2, 0xFF0000);
 	}
 	if (x > 1 && x < 101 && y > 355 && y < 375)
-	{
-		dot1 = create_dot(1, 355, 0, 0);
-		dot2 = create_dot(101, 375, 0, 0);
-		draw_box(param, dot1, dot2, 0xFF0000);
-	}
+		tp_dot(param);
 	if (x > 1 && x < 101 && y > 375 && y < 395)
-	{
-		dot1 = create_dot(1, 375, 0, 0);
-		dot2 = create_dot(101, 395, 0, 0);
-		draw_box(param, dot1, dot2, 0xFF0000);
 		exit(0);
-	}
 }
 
 int		mouse_f(int buttom, int x, int y, void *param)

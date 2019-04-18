@@ -15,7 +15,7 @@
 
 # define W_NAME "Fdf42"
 # define WINDOW_HEIGTH 600
-# define WINDOW_WIDTH 1200
+# define WINDOW_WIDTH 1000
 # define WINDOW_H_M 0
 # define WINDOW_W_M WINDOW_WIDTH-100
 # define WINDOW_H_C WINDOW_HEIGTH/2
@@ -25,7 +25,7 @@
 # define SENS_ZOOM_IN 1.1
 # define SENS_ZOOM_OUT 0.9
 # define AT_MULT 6
-# define COLOR_OPT 15
+# define COLOR_OPT 1
 # define UP 126
 # define LEFT 123
 # define DOWN 125

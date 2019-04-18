@@ -98,3 +98,28 @@ void		draw_line_p(t_param *param, t_dot *dot1, t_dot *dot2)
 		--n_pixels;
 	}
 }
+
+void		draw_line_t(t_param *param, t_dot *dot1, t_dot *dot2)
+{
+	float		inc_xy[2];
+	float		st_xy[2];
+	t_spec		st_c;
+	t_spec		inc_c;
+	int		n_pixels;
+
+	n_pixels = get_inc_n_maxp(dot1, dot2, &inc_xy[0], &inc_xy[1]);
+	st_xy[0] = dot1->x;
+	st_xy[1] = dot1->y;
+	get_spec(&st_c, dot1->color);
+	get_color_inc(n_pixels, dot1->color, dot2->color, &inc_c);
+	while (n_pixels >= 0)
+	{
+		if ((st_xy[0] > 0) && (st_xy[1] > 0) && (st_xy[1] < WINDOW_HEIGTH) && (st_xy[0] < WINDOW_WIDTH)) 
+			ch_pixel_put(param, (int)st_xy[0], (int)st_xy[1], &st_c);
+		if ((n_pixels % COLOR_OPT) == 0)
+			inc_st_color(&st_c, &inc_c);
+		st_xy[0] += inc_xy[0];
+		st_xy[1] += inc_xy[1];
+		--n_pixels;
+	}
+}

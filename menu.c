@@ -45,4 +45,5 @@ void		draw_menu(t_param *param, int color)
 			"EXIT: esc");
 	img_ptr = mlx_xpm_file_to_image(param->mlx_ptr, "menu.xpm", &x, &y);
 	mlx_put_image_to_window(param->mlx_ptr, param->win_ptr, img_ptr, 0, 0); // destroy and yatayatayta
+	mlx_destroy_image(param->mlx_ptr, img_ptr);
 }

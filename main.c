@@ -48,10 +48,10 @@ static void	standard_placement(t_param *param, int zmult, t_colors *color)
 	int	min;
 
 	find_x_y(param->dot, &x, &y);
-	if (((WINDOW_WIDTH - 150) / y) > ((WINDOW_HEIGTH - 150) / x))
-		min = (WINDOW_HEIGTH - 150) / x;
+	if (((WINDOW_WIDTH - 150) / x) > ((WINDOW_HEIGTH - 150) / y))
+		min = (WINDOW_HEIGTH - 150) / y;
 	else
-		min = (WINDOW_WIDTH - 150) / y;
+		min = (WINDOW_WIDTH - 150) / x;
 	zoom_z(param->dot, min, zmult);
 	zoom_z(param->res, min, zmult);
 	shx = (WINDOW_WIDTH / 2) - (x * min / 2);
