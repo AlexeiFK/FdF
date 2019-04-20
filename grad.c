@@ -9,9 +9,9 @@
 
 typedef struct			s_spec
 {
-	int	r;
-	int	g;
-	int	b;
+	float	r;
+	float	g;
+	float	b;
 }				t_spec;
 
 
@@ -27,26 +27,16 @@ int 		main()
 	t_spec	spec1;
 	t_spec	spec2;
 
-	spec1.r = color1 / (16*16*16*16);
-	spec1.g = (color1 / (16*16)) % (16*16);
-	spec1.b = color1 % (16 * 16);
+	spec1.r = (color1 & 0xff0000);
+	spec1.g = (color1 & 0x00ff00);
+	spec1.b = (color1 & 0x0000ff);
 
 	spec2.r = color2 / (16*16*16*16);
 	spec2.g = (color2 / (16*16)) % (16*16);
 	spec2.b = color2 % (16 * 16);
 
-	if (abs(spec1.r - spec2.r) > abs(spec1.g - spec2.g))
-		if (abs(spec1.r - spec2.r) > abs(spec1.b - spec2.b))
-			printf("r");
-		else
-			printf("b");
-	else
-		if (abs(spec1.g - spec2.g) > abs(spec1.b - spec2.b))
-			printf("g");
-		else
-			printf("b");
 
-	printf("%x, %x, %x", spec1.r, spec1.g, spec1.b);
+	printf("%x, %x, %x", (int)spec1.r, (int)spec1.g, (int)spec1.b);
 
 
 

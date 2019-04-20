@@ -49,7 +49,6 @@ typedef struct		s_param
 	t_dot		*dot;
 	t_dot		*res;
 	t_colors	*clr;
-	int		dep[WINDOW_WIDTH][WINDOW_HEIGTH];
 	unsigned char	*s;
 	int		size;
 }			t_param;

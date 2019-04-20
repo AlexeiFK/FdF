@@ -21,7 +21,7 @@ void		draw_box(t_param *param, t_dot *dot1, t_dot *dot4, int color)
 
 void		draw_menu(t_param *param, int color)
 {
-	void		*img_ptr;
+	static void	*img_ptr = NULL;
 	int		x;
 	int		y;
 

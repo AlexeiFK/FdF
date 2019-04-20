@@ -31,7 +31,7 @@ void		get_color_inc_o(int n_pixels, unsigned int color1, unsigned int color2, t_
 	inc->b = ((s2.b - s1.b) / n_pixels);
 }
 
-void	str_to_dots(char **split, t_dot **dots)// t_colors *c)
+void	str_to_dots(char **split, t_dot **dots)
 {
 	static int	col = 0;
 	int			x;
@@ -40,26 +40,9 @@ void	str_to_dots(char **split, t_dot **dots)// t_colors *c)
 	int		color_flag;
 
 	x = 0;
-	/*
-	if (c == NULL)
-		color_flag = 0;
-	else
-		color_flag = 1;
-		*/
 	while (split[x] != NULL)
-	{/*
-		if (color_flag)
-		{
-			if (ft_atoi(split[x]) == 0)
-				tmp = create_dot(x, col, ft_atoi(split[x]), strtol(c->mid, NULL, 16));
-			else if (ft_atoi(split[x]) > 0)
-				tmp = create_dot(x, col, ft_atoi(split[x]), strtol(c->top, NULL, 16));
-			else if (ft_atoi(split[x]) < 0)
-				tmp = create_dot(x, col, ft_atoi(split[x]), strtol(c->bot, NULL, 16));
-		}
-		else
-		*/
-			tmp = create_dot(x, col, ft_atoi(split[x]), 0xFFFFFF);
+	{
+		tmp = create_dot(x, col, ft_atoi(split[x]), 0xFFFFFF);
 		tmp->row = col;
 		add_dot(dots, tmp);
 		x++;
@@ -143,6 +126,12 @@ void	ft_cpy(t_dot **new, t_dot *dot)
 	}
 }
 
+static void	error_file_msg(void)
+{
+	ft_putstr("File error\n");
+	exit(0);
+}
+
 t_dot	*ft_reader(char *filename, t_colors *color)
 {
 	int		fd;
@@ -153,6 +142,8 @@ t_dot	*ft_reader(char *filename, t_colors *color)
 
 	dots = NULL;
 	fd = open(filename, O_RDONLY);
+	if (fd < 0)
+		error_file_msg();
 	while (get_next_line(fd, &str) > 0)
 	{
 		split = ft_strsplit(str, ' ');
@@ -160,6 +151,7 @@ t_dot	*ft_reader(char *filename, t_colors *color)
 		str_to_dots(split, &dots);
 		free(split); // normalnii free dlya char**
 	}
-	ft_colorize(dots, color);
+	if (color)
+		ft_colorize(dots, color);
 	return (dots);
 }

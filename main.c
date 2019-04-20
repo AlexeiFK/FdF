@@ -19,13 +19,13 @@
 #include "config.h"
 
 
-static void	find_x_y(t_dot *dot, int *x, int *y)
+static void	find_x_y(t_dot *dot, float *x, float *y)
 {
 	*x = dot->x;
 	*y = dot->y;
+//	*z = dot->z;
 	while (dot->next)
 	{
-		//max
 		dot = dot->next;
 	}
 }
@@ -39,13 +39,13 @@ void		test123(t_dot *dot)
 	}
 }
 
-static void	standard_placement(t_param *param, int zmult, t_colors *color)
+static void	standard_placement(t_param *param, float zmult, t_colors *color)
 {
-	int	x;
-	int	y;
+	float	x;
+	float	y;
 	int	shx;
 	int	shy;
-	int	min;
+	float	min;
 
 	find_x_y(param->dot, &x, &y);
 	if (((WINDOW_WIDTH - 150) / x) > ((WINDOW_HEIGTH - 150) / y))
