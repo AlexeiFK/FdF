@@ -8,7 +8,6 @@
 
 void	sh_net_dot(t_param *param, int x, int y, int z)
 {
-//	clear_and_rest(param);
 	ft_bzero(param->s, 4 * WINDOW_HEIGTH * WINDOW_WIDTH);
 	shift(param->dot, x, y, z);
 	net_dot_c(param);
@@ -18,7 +17,6 @@ void	sh_net_dot(t_param *param, int x, int y, int z)
 
 void	zm_net_dot(t_param *param, float mult, int x, int y)
 {
-//	clear_and_rest(param);
 	ft_bzero(param->s, 4 * WINDOW_HEIGTH * WINDOW_WIDTH);
 	zoom(param->dot, mult, x, y);
 	net_dot_c(param);
@@ -28,7 +26,6 @@ void	zm_net_dot(t_param *param, float mult, int x, int y)
 
 void	rot_net_dot(t_param *param, float angle, char axis)
 {
-	//clear_and_rest(param);
 	ft_bzero(param->s, 4 * WINDOW_HEIGTH * WINDOW_WIDTH);
 	shift(param->dot, -WINDOW_W_C, -WINDOW_H_C, 0);
 	if (axis == 'x')
@@ -50,7 +47,6 @@ void	rot_net_dot(t_param *param, float angle, char axis)
 
 void	new_net_dot(t_param *param)
 {
-//	clear_and_rest(param);
 	ft_bzero(param->s, 4 * WINDOW_HEIGTH * WINDOW_WIDTH);
 	free(param->dot);
 	param->dot = NULL;	//norm free
@@ -65,7 +61,6 @@ void	zx_net_dot(t_param *param, float mult)
 	static float	m = 1;
 
 	m *= mult;
-	//clear_and_rest(param);
 	ft_bzero(param->s, 4 * WINDOW_HEIGTH * WINDOW_WIDTH);
 	free(param->dot);
 	param->dot = NULL;	//norm free

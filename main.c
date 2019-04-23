@@ -10,6 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <limits.h>
+#include <float.h>
 #include "mlx.h"
 #include <math.h>
 #include "fdf.h"
@@ -78,6 +80,7 @@ static void	mlx_setup(char *filename, t_param *param, t_colors *colors)
 	param->mlx_ptr = mlx_init();
 	param->win_ptr = mlx_new_window(param->mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGTH, W_NAME);
 	param->img_ptr = mlx_new_image(param->mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGTH);
+	param->menu_ptr = mlx_xpm_file_to_image(param->mlx_ptr, "menu.xpm", &endian, &bits); //
 	param->s = mlx_get_data_addr(param->img_ptr, &bits, &(param->size), &endian);
 }
 

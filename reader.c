@@ -15,34 +15,21 @@
 #include "fdf.h"
 #include "get_next_line.h"
 
-void		get_color_inc_o(int n_pixels, unsigned int color1, unsigned int color2, t_spec *inc)
-{
-	t_spec	s1;
-	t_spec	s2;
-
-	s1.r = (color1 & 0xff0000) >> 16;
-	s1.g = (color1 & 0x00ff00) >> 8;
-	s1.b = (color1 & 0x0000ff);
-	s2.r = (color2 & 0xff0000) >> 16;
-	s2.g = (color2 & 0x00ff00) >> 8;
-	s2.b = (color2 & 0x0000ff);
-	inc->r = ((s2.r - s1.r) / n_pixels);
-	inc->g = ((s2.g - s1.g) / n_pixels);
-	inc->b = ((s2.b - s1.b) / n_pixels);
-}
-
 void	str_to_dots(char **split, t_dot **dots)
 {
 	static int	col = 0;
 	int			x;
-	int			i;
 	t_dot		*tmp;
-	int		color_flag;
+	char		*map_color;
 
 	x = 0;
 	while (split[x] != NULL)
 	{
-		tmp = create_dot(x, col, ft_atoi(split[x]), 0xFFFFFF);
+		map_color = ft_strchr(split[x], ',');
+		if (map_color == NULL)
+			tmp = create_dot(x, col, ft_atoi(split[x]), BASIC_COLOR);
+		else
+			tmp = create_dot(x, col, ft_atoi(split[x]), strtol((map_color + 1), NULL, 16));
 		tmp->row = col;
 		add_dot(dots, tmp);
 		x++;
@@ -69,22 +56,17 @@ void	find_max_min(t_dot *dot, int *max, int *min)
 	*min = t_min;
 }
 
-void	ft_colorize(t_dot *dot, t_colors *c)
+void	ft_paint_dots_up(t_dot *dot, t_colors *c, int start, int end)
 {
-	int	max;
-	int	min;
-	int	mid;
 	int	i;
-	t_dot	*tmp;
 	t_spec	st_c;
-	t_spec  inc;
+	t_spec	inc;
+	t_dot	*tmp;
 
-	find_max_min(dot, &max, &min);
-	mid = (max + min) / 2;
-	i = mid;
+	i = start;
 	get_spec(&st_c, strtol(c->mid, NULL, 16));
-	get_color_inc_o(abs(max - mid), strtol(c->mid, NULL, 16), strtol(c->top, NULL, 16), &inc);
-	while (i <= max)
+	get_color_inc(abs(end - start), strtol(c->mid, NULL, 16), strtol(c->top, NULL, 16), &inc);
+	while (i <= end)
 	{
 		tmp = dot;
 		while (tmp)
@@ -96,10 +78,19 @@ void	ft_colorize(t_dot *dot, t_colors *c)
 		i++;
 		inc_st_color(&st_c, &inc);
 	}
-	i = mid;
+}
+
+void	ft_paint_dots_down(t_dot *dot, t_colors *c, int start, int end)
+{
+	int	i;
+	t_spec	st_c;
+	t_spec	inc;
+	t_dot	*tmp;
+
+	i = end;
 	get_spec(&st_c, strtol(c->mid, NULL, 16));
-	get_color_inc_o(abs(min - mid), strtol(c->mid, NULL, 16), strtol(c->bot, NULL, 16), &inc);
-	while (i >= min)
+	get_color_inc(abs(start - end), strtol(c->mid, NULL, 16), strtol(c->bot, NULL, 16), &inc);
+	while (i >= start)
 	{
 		tmp = dot;
 		while (tmp)
@@ -111,6 +102,18 @@ void	ft_colorize(t_dot *dot, t_colors *c)
 		i--;
 		inc_st_color(&st_c, &inc);
 	}
+}
+
+void	ft_colorize(t_dot *dot, t_colors *c)
+{
+	int	max;
+	int	min;
+	int	mid;
+
+	find_max_min(dot, &max, &min);
+	mid = (max + min) / 2;
+	ft_paint_dots_up(dot, c, mid, max);
+	ft_paint_dots_down(dot, c, min, mid);
 }
 
 void	ft_cpy(t_dot **new, t_dot *dot)

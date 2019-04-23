@@ -35,6 +35,14 @@ void	add_dot(t_dot **dot, t_dot *new)
 	*dot = new;
 }
 
+void	add_box(t_box **dot, t_box *new)
+{
+	if (!dot || !new)
+		return ;
+	new->next = *dot;
+	*dot = new;
+}
+
 void	iter_dot(t_dot *dot, void (*f)(t_dot *elem))
 {
 	while (dot)
@@ -57,8 +65,4 @@ void	free_dot(t_dot **dot)
 		dtr = tmp;
 	}
 	*dot = NULL;
-}
-
-void	free_line(t_dot *dot)
-{
 }

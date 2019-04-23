@@ -41,9 +41,6 @@ int		keyboard_f(int keycode, void *param)
 
 void		menu_handler(void *param, int x, int y)
 {
-	t_dot	*dot1;
-	t_dot	*dot2;
-
 	if (x > 1 && x < 50 && y > 115 && y < 135)
 		zx_net_dot(param, 0.9);
 	if (x > 50 && x < 101 && y > 115 && y < 135)
@@ -65,19 +62,14 @@ void		menu_handler(void *param, int x, int y)
 	if (x > 1 && x < 101 && y > 290 && y < 310)
 	{
 		new_net_dot(param);
-		clear_and_rest(param);
 		rot_net_dot(param, 0 , 'i');
 	}
 	if (x > 1 && x < 101 && y > 310 && y < 330)
 		new_net_dot(param);
 	if (x > 1 && x < 101 && y > 335 && y < 355)
-	{
-		dot1 = create_dot(1, 335, 0, 0);
-		dot2 = create_dot(101, 355, 0, 0);
-		draw_box(param, dot1, dot2, 0xFF0000);
-	}
+		tp_dot(param, 0);
 	if (x > 1 && x < 101 && y > 355 && y < 375)
-		tp_dot(param);
+		tp_dot(param, 1);
 	if (x > 1 && x < 101 && y > 375 && y < 395)
 		exit(0);
 }
@@ -100,31 +92,9 @@ int		mouse_f(int buttom, int x, int y, void *param)
 			zm_net_dot(param, SENS_ZOOM_OUT, WINDOW_W_C, WINDOW_H_C);
 		menu_handler(param, x, y);
 	}
-	if (buttom == 2)
-	{
-		t_dot *dot1 = create_dot(x, y, 0, 0x8000ff); 
-		t_dot *dot2 = create_dot(x + 200, y + 200, 0, 0x00ff00);
-		draw_line_p(param, dot1, dot2);
-	}
 	if (buttom == 4)
 		zm_net_dot(param, SENS_ZOOM_IN, x, y);
 	if (buttom == 5)
 		zm_net_dot(param, SENS_ZOOM_OUT, x, y);
 	return (0);
-}
-
-int		hook_f(void *param)
-{
-	static  int	color1 = 0xFF00FF;
-	static  int	color2 = 0x00ff00;
-	static 	t_dot dot1;
-	static 	t_dot dot2;
-
-	dot1.color = color1;
-	dot2.color = color2;
-	dot1.y++;
-	dot2.x = WINDOW_WIDTH;
-	dot2.y++;
-	draw_line_p(param, &dot1, &dot2);
-	//net_dot(param);
 }

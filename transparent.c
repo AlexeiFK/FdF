@@ -1,59 +1,36 @@
 
+#include <limits.h>
+#include <float.h>
 #include "config.h"
 #include "fdf.h"
 #include <math.h>
 #include <stdio.h>
 #include "mlx.h"
+#include "libft.h"
 
-void	print_dots(t_dot *dot)
+/*
+void	print_dots(t_param *param, t_dot *dot)
 {
 	int i;
+	int zzz;
+	int	xxx;
+	char	*s1;
+	char	*s;
 
 	i = 0;
 	while (dot)
 	{
-		printf("(%d)x[%f]y[%f]z[%f]\n", i, dot->x, dot->y, dot->z);
+//		zzz = (int)dot->x;
+		xxx = (int)dot->dep;
+//		s1 = ft_strjoin(ft_itoa(zzz), "=x | dep=");
+		s = ft_strjoin("d", ft_itoa(xxx));
+//		printf("(%d)x[%f]y[%f]z[%f]\n", i, dot->x, dot->y, dot->z);
+		mlx_string_put(param->mlx_ptr, param->win_ptr, (int)dot->x, (int)dot->y, 0xffffff, s);
 		dot = dot->next;
 		i++;
 	}
 }
-
-void	new_dep_map(t_dot *dot)
-{
-	int map[WINDOW_WIDTH][WINDOW_HEIGTH];
-	int i;
-	int j;
-
-	i = 0;
-	while (i < WINDOW_WIDTH)
-	{
-		j = 0;
-		while (j < WINDOW_HEIGTH)
-		{
-			map[i][j] = 0;
-			j++;
-		}
-		i++;
-	}
-	while (dot)
-	{
-		map[(int)round(dot->x)][(int)round(dot->y)] = dot->z;
-		dot = dot->next;
-	}
-	i = 0;
-	while (i < WINDOW_WIDTH)
-	{
-		j = 0;
-		while (j < WINDOW_HEIGTH)
-		{
-			if (map[i][j] != 0)
-				printf("map[%d][%d] = %d\n", i, j, map[i][j]);
-			j++;
-		}
-		i++;
-	}
-
-}
+*/
 
 void	ch_pixel_put(t_param *param, int x, int y, t_spec *c)
 {
@@ -64,27 +41,33 @@ void	ch_pixel_put(t_param *param, int x, int y, t_spec *c)
 	s[x * 4] = c->b;
 	s[x * 4 + 1] = c->g;
 	s[x * 4 + 2] = c->r;
-//	printf("%d,%d,%d\n", s[x*4], s[x*4+1], s[x*4+2]);
 }
 
-void	tp_dot(t_param *param)
+void	get_dep(t_param *param)
 {
-	unsigned int color;
-	int		i;
-	int		j;
-	unsigned char	*s;
-	int		bits;
-	int		size;
-	int		endian;
-	t_spec		spec;
-	void		*img_ptr1;
+	t_dot	*dot;
 
-	spec.r = 255;
-	spec.g = 0;
-	spec.b = 255;
-	param->img_ptr = mlx_new_image(param->mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGTH);
-	param->s = mlx_get_data_addr(param->img_ptr, &bits, &(param->size), &endian);
-//	mlx_put_image_to_window(param->mlx_ptr, param->win_ptr, param->img_ptr, 0, 0); // destroy and yatayatayta
-	//new_dep_map(param->dot);
-	//print_dots(param->dot);
+	dot = param->dot;
+	shift(param->dot, -WINDOW_W_C, -WINDOW_H_C, 0);
+	oy_rot(param->dot, M_PI / 2);
+	shift(param->dot, WINDOW_W_C, WINDOW_H_C, 0);
+	while (dot)
+	{
+		dot->dep = (int)round(dot->x);
+		dot = dot->next;
+	}
+	shift(param->dot, -WINDOW_W_C, -WINDOW_H_C, 0);
+	oy_rot(param->dot, -M_PI / 2);
+	shift(param->dot, WINDOW_W_C, WINDOW_H_C, 0);
+}
+
+void	tp_dot(t_param *param, char diag)
+{
+	get_dep(param);
+	ft_bzero(param->s, 4 * WINDOW_HEIGTH * WINDOW_WIDTH);
+	param->box = create_box(param);
+	sort_box(param->box);
+	draw_box_new(param, param->box, diag);
+	mlx_put_image_to_window(param->mlx_ptr, param->win_ptr, param->img_ptr, 0, 0); // destroy and yatayatayta
+	draw_menu(param, 0xffffff);
 }
