@@ -90,6 +90,7 @@ void		ch_pixel_put(t_param *param, int x, int y, t_spec *c);
 int		mouse_f(int buttom, int x, int y, void *param);
 int		keyboard_f(int keycode, void *param);
 int		hook_f(void *param);
+void		ft_colorize(t_dot *dot, t_colors *c);
 
 void		get_color_inc(int n_pixels, unsigned int color1, unsigned int color2, t_spec *inc);
 void		inc_st_color(t_spec *c, t_spec *inc);

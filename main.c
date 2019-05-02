@@ -20,27 +20,6 @@
 #include "libft.h"
 #include "config.h"
 
-
-static void	find_x_y(t_dot *dot, float *x, float *y)
-{
-	*x = dot->x;
-	*y = dot->y;
-//	*z = dot->z;
-	while (dot->next)
-	{
-		dot = dot->next;
-	}
-}
-
-void		test123(t_dot *dot)
-{
-	while (dot)
-	{
-		printf("x = %f, y = %f\n", dot->x, dot->y);
-		dot = dot->next;
-	}
-}
-
 static void	standard_placement(t_param *param, float zmult, t_colors *color)
 {
 	float	x;
@@ -49,7 +28,8 @@ static void	standard_placement(t_param *param, float zmult, t_colors *color)
 	int	shy;
 	float	min;
 
-	find_x_y(param->dot, &x, &y);
+	x = param->dot->x;
+	y = param->dot->y;
 	if (((WINDOW_WIDTH - 150) / x) > ((WINDOW_HEIGTH - 150) / y))
 		min = (WINDOW_HEIGTH - 150) / y;
 	else
@@ -61,7 +41,7 @@ static void	standard_placement(t_param *param, float zmult, t_colors *color)
 	shift(param->dot, shx, shy, 0);
 	shift(param->res, shx, shy, 0);
 	net_dot_c(param);
-	mlx_put_image_to_window(param->mlx_ptr, param->win_ptr, param->img_ptr, 0, 0); // destroy and yatayatayta
+	mlx_put_image_to_window(param->mlx_ptr, param->win_ptr, param->img_ptr, 0, 0);
 	draw_menu(param, 0xFFFFFF);
 }
 
@@ -69,8 +49,8 @@ static void	mlx_setup(char *filename, t_param *param, t_colors *colors)
 {
 	int	bits;
 	int	endian;
-	param->res = NULL;
 
+	param->res = NULL;
 	if (colors->top != NULL)
 		param->dot = ft_reader(filename, colors);
 	else
@@ -80,7 +60,7 @@ static void	mlx_setup(char *filename, t_param *param, t_colors *colors)
 	param->mlx_ptr = mlx_init();
 	param->win_ptr = mlx_new_window(param->mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGTH, W_NAME);
 	param->img_ptr = mlx_new_image(param->mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGTH);
-	param->menu_ptr = mlx_xpm_file_to_image(param->mlx_ptr, "menu.xpm", &endian, &bits); //
+	param->menu_ptr = mlx_xpm_file_to_image(param->mlx_ptr, "menu.xpm", &endian, &bits);
 	param->s = mlx_get_data_addr(param->img_ptr, &bits, &(param->size), &endian);
 }
 
