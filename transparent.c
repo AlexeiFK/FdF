@@ -6,7 +6,7 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/16 18:48:39 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/08/16 19:43:26 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/08/16 21:30:59 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void		swap_box(t_box *box1, t_box *box2)
 	t_dot	*d2;
 	t_dot	*d3;
 	t_dot	*d4;
-	int	ctr;
+	int		ctr;
 
 	d1 = box1->dot1;
 	d2 = box1->dot2;
@@ -84,7 +84,7 @@ void		draw_box_new(t_param *param, t_box *box, char diags)
 	}
 }
 
-void	get_dep(t_param *param)
+void		get_dep(t_param *param)
 {
 	t_dot	*dot;
 
@@ -102,7 +102,7 @@ void	get_dep(t_param *param)
 	shift(param->dot, WINDOW_W_C, WINDOW_H_C, 0);
 }
 
-void	tp_dot(t_param *param, char diag)
+void		tp_dot(t_param *param, char diag)
 {
 	get_dep(param);
 	param->box = create_box(param);

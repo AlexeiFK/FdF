@@ -6,7 +6,7 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 19:40:40 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/08/16 21:19:35 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/08/16 21:33:35 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ void	str_to_dots(char **split, t_dot **dots)
 		if (map_color == NULL)
 			tmp = create_dot(x, col, ft_atoi(split[x]), BASIC_COLOR);
 		else
-			tmp = create_dot(x, col, ft_atoi(split[x]), strtol((map_color + 1), NULL, 16));
+			tmp = create_dot(x, col,
+					ft_atoi(split[x]), strtol((map_color + 1), NULL, 16));
 		tmp->row = col;
 		add_dot(dots, tmp);
 		x++;
@@ -48,12 +49,6 @@ void	ft_cpy(t_dot **new, t_dot *dot)
 		add_dot(new, tmp);
 		dot = dot->next;
 	}
-}
-
-static void	error_file_msg(void)
-{
-	ft_putstr("File error\n");
-	exit(0);
 }
 
 void	free_split(char **split)

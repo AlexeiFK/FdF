@@ -6,7 +6,7 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/26 22:33:58 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/08/16 20:49:35 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/08/16 21:34:27 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,6 @@ static void	mlx_setup(char *filename, t_param *param, t_colors *colors)
 	param->menu_ptr = mlx_xpm_file_to_image(param->mlx_ptr, "menu.xpm", &endian, &bits);
 	param->mult = 1;
 	param->s = (unsigned char*)mlx_get_data_addr(param->img_ptr, &bits, &(param->size), &endian);
-}
-
-static void	usage_msg(void)
-{
-	ft_putstr("usage: ./fdf [filename] [color_bot] ");
-	ft_putstr("[color_mid] [color_top]\n");
-	exit(0);
 }
 
 int		main(int argc, char **argv)

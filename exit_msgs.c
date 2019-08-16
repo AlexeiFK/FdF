@@ -6,11 +6,12 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/16 21:03:47 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/08/16 21:09:45 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/08/16 21:34:18 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+#include "libft.h"
 #include <stdlib.h>
 #include "mlx.h"
 
@@ -23,3 +24,17 @@ void	free_and_exit(t_param *param)
 	mlx_destroy_image(param->mlx_ptr, param->menu_ptr);
 	exit(0);
 }
+
+void	usage_msg(void)
+{
+	ft_putstr("usage: ./fdf [filename] [color_bot] ");
+	ft_putstr("[color_mid] [color_top]\n");
+	exit(0);
+}
+
+void	error_file_msg(void)
+{
+	ft_putstr("File error\n");
+	exit(0);
+}
+
