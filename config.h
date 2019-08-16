@@ -6,7 +6,7 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 20:49:23 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/04/04 20:49:58 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/08/16 20:44:12 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,19 +31,33 @@
 # define LEFT 123
 # define DOWN 125
 # define RIGHT 124
+
+# define EKEY 14
+# define RKEY 15
+
 # define WKEY 13
+# define QKEY 12
+
 # define AKEY 0
 # define SKEY 1
-# define DKEY 2
-# define ESC 49
-# define QKEY 50
-# define EKEY 51
-# define ZKEY 52
-# define KKEY 53
-# define LKEY 54
-# define OKEY 55
-# define VKEY 118
-# define BKEY 98
-# define CKEY 8
+
+# define ZKEY 6
+# define XKEY 7
+
+# define ESC 53
+
+# define IKEY 34
+
+# define KEY1 18
+# define KEY2 19
+# define KEY3 20
+
+# define TKEY 17
+# define YKEY 16
+
+# define SPACE 49
+
+# define VKEY 9
+# define BKEY 11
 
 #endif

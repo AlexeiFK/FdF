@@ -6,7 +6,7 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/16 18:58:03 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/08/16 19:54:32 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/08/16 20:43:16 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,36 +16,60 @@
 #include <math.h>
 #include <stdlib.h>
 
+#include <stdio.h>
+
 int		keyboard_f(int keycode, void *param)
 {
 	int		is_trs;
 
 	is_trs = 0;
-//	printf("_______________________________%d\n", keycode);
-	if (keycode == UP || keycode == WKEY)
+	if (keycode == UP)
 		sh_net_dot(param, 0, SENS_VERT, 0);
-	if (keycode == DOWN || keycode == SKEY)
+	if (keycode == DOWN)
 		sh_net_dot(param, 0, -SENS_VERT, 0);
-	if (keycode == RIGHT || keycode == DKEY)
+	if (keycode == RIGHT)
 		sh_net_dot(param, -SENS_HOR, 0, 0);
-	if (keycode == LEFT || keycode == AKEY)
+	if (keycode == LEFT)
 		sh_net_dot(param, SENS_HOR, 0, 0);
-	if (keycode == VKEY)
-		sh_net_dot(param, 0, 0, 20);
-	if (keycode == BKEY)
-		sh_net_dot(param, 0, 0, -20);
 	if (keycode == QKEY)
 		rot_net_dot(param, M_PI / 30 , 'x');
-	if (keycode == EKEY)
+	if (keycode == WKEY)
+		rot_net_dot(param, - (M_PI / 30) , 'x');
+	if (keycode == AKEY)
 		rot_net_dot(param, M_PI / 30 , 'y');
+	if (keycode == SKEY)
+		rot_net_dot(param, - (M_PI / 30) , 'y');
 	if (keycode == ZKEY)
 		rot_net_dot(param, M_PI / 30 , 'z');
-	if (keycode == KKEY)
+	if (keycode == XKEY)
+		rot_net_dot(param, - (M_PI / 30) , 'z');
+	if (keycode == KEY1)
 		zx_net_dot(param, 1.1);
-	if (keycode == LKEY)
+	if (keycode == KEY2)
 		zx_net_dot(param, 0.9);
-	if (keycode == OKEY)
+	if (keycode == KEY3)
 		zx_net_dot(param, -1);
+	if (keycode == EKEY)
+		zm_net_dot(param, SENS_ZOOM_IN, WINDOW_W_C, WINDOW_H_C);
+	if (keycode == RKEY)
+		zm_net_dot(param, SENS_ZOOM_OUT, WINDOW_W_C, WINDOW_H_C);
+	if (keycode == IKEY)
+	{
+		new_net_dot(param);
+		rot_net_dot(param, 0 , 'i');
+	}
+	if (keycode == SPACE)
+		new_net_dot(param);
+	if (keycode == TKEY)
+	{
+		is_trs = 1;
+		tp_dot(param, 0);
+	}
+	if (keycode == YKEY)
+	{
+		is_trs = 1;
+		tp_dot(param, 1);
+	}
 	if (keycode == ESC)
 		exit(0);
 	refresh_screen(param, is_trs);
