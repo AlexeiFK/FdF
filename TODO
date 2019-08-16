@@ -1,13 +1,10 @@
-1. Make boxes malloc only once
-1. -0fast -march=native
-CFILES = main.c primitives.c draw.c reader.c get_next_line.c \
-		 screen.c convert.c  screen2.c controls.c menu.c transparent.c box.c draw_box.c colorize.c rotation.c
-2. new .c for ch_pixel_put
-3. good names
-4. function for calculate clear screen and put images 
-5. fast sin-cos 
-6. Statment struct
-7. boxes fill only if on screen (faster algoritm)
+3. good names: new .c files
 8. fractal -> fdf
 9. norminate
-10. strtol?
+12. unused includes
+12. unused headers
+19. malloc errors (fractal and fdf)
+10. leaks
+	21. leak in gnl
+
+67. ramki dlya zooma i shifta
