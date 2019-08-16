@@ -6,7 +6,7 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 21:01:22 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/04/04 21:05:17 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/08/16 18:47:17 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define FDF_H
 
 #include "config.h"
-#include <bsd/string.h>
 
 typedef struct			s_state
 {
@@ -78,6 +77,7 @@ typedef struct		s_param
 
 t_dot		*create_dot(int x, int y, int z, int c);
 t_box		*create_box(t_param *param);
+void		free_box(t_box **box);
 void		draw_box_new(t_param *param, t_box *box, char diag);
 void		free_dot(t_dot **dot);
 t_dot		*ft_reader(char *filename, t_colors *color);

@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   box.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/08/16 18:19:21 by rjeor-mo          #+#    #+#             */
+/*   Updated: 2019/08/16 18:47:54 by rjeor-mo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "libft.h"
 #include <stdlib.h>
@@ -13,7 +24,26 @@ t_box		*new_box()
 	return (new);
 }
 
-static void	put_vert_b_new(t_dot *dot, t_param *param, int rows, t_box **box)
+void		free_box(t_box **box)
+{
+	t_box	*tmp;
+	t_box	*btf;
+
+	btf = *box;
+	while (btf)
+	{
+		tmp = btf->next;
+		free(btf->dot1);
+		free(btf->dot2);
+		free(btf->dot3);
+		free(btf->dot4);
+		free(btf);
+		btf = tmp;
+	}
+	*box = NULL;
+}
+
+static void	setup_box_info(t_dot *dot, int rows, t_box **box)
 {
 	t_dot	*dotp;
 	t_box	*tmp;
@@ -41,16 +71,6 @@ static void	put_vert_b_new(t_dot *dot, t_param *param, int rows, t_box **box)
 	}
 }
 
-void		fill_dot()
-{
-
-}
-
-void		fill_box_info(t_param *param)
-{
-
-}
-
 t_box		*create_box(t_param *param)
 {
 	t_dot	*tmp;
@@ -70,74 +90,8 @@ t_box		*create_box(t_param *param)
 			n_rows = 1;
 		dot = dot->next;
 	}
-	put_vert_b_new(tmp, param, n_rows, &new);
+	setup_box_info(tmp, n_rows, &new);
 	return (new);
 }
 
 
-void		swap_box(t_box *box1, t_box *box2)
-{
-	t_dot	*d1;
-	t_dot	*d2;
-	t_dot	*d3;
-	t_dot	*d4;
-	int	ctr;
-
-	d1 = box1->dot1;
-	d2 = box1->dot2;
-	d3 = box1->dot3;
-	d4 = box1->dot4;
-	ctr = box1->ctr;
-	box1->dot1 = box2->dot1;
-	box1->dot2 = box2->dot2;
-	box1->dot3 = box2->dot3;
-	box1->dot4 = box2->dot4;
-	box1->ctr = box2->ctr;
-	box2->dot1 = d1;
-	box2->dot2 = d2;
-	box2->dot3 = d3;
-	box2->dot4 = d4;
-	box2->ctr = ctr;
-}
-
-
-void		sort_box(t_box *box)
-{
-	t_box	*tmpi;
-	t_box	*tmpj;
-	t_box	*tmps;
-
-	tmpi = box;
-	while (tmpi)
-	{
-		tmpj = box;
-		while (tmpj->next)
-		{
-			if (tmpj->ctr > tmpj->next->ctr)
-				swap_box(tmpj, tmpj->next);
-			tmpj = tmpj->next;
-		}
-		tmpi = tmpi->next;
-	}
-}
-
-void		draw_box_new(t_param *param, t_box *box, char diags)
-{
-	while (box)
-	{
-		draw_box_n(param, box->dot1, box->dot2, box->dot3, 0);
-		draw_box_n(param, box->dot2, box->dot1, box->dot4, 0);
-		draw_box_n(param, box->dot3, box->dot1, box->dot4, 0);
-		draw_box_n(param, box->dot4, box->dot2, box->dot3, 0);
-		draw_line_t(param, box->dot1, box->dot2);
-		draw_line_t(param, box->dot1, box->dot3);
-		draw_line_t(param, box->dot3, box->dot4);
-		draw_line_t(param, box->dot2, box->dot4);
-		if (diags)
-		{
-			draw_line_t(param, box->dot1, box->dot4);
-			draw_line_t(param, box->dot3, box->dot2);
-		}
-		box = box->next;
-	}
-}

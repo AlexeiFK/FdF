@@ -6,7 +6,7 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/26 22:33:58 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/04/04 21:21:57 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/08/16 17:35:21 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 #include "libft.h"
 #include "config.h"
 
-static void	standard_placement(t_param *param, float zmult, t_colors *color)
+static void	standard_placement(t_param *param, float zmult)
 {
 	float	x;
 	float	y;
@@ -61,7 +61,7 @@ static void	mlx_setup(char *filename, t_param *param, t_colors *colors)
 	param->win_ptr = mlx_new_window(param->mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGTH, W_NAME);
 	param->img_ptr = mlx_new_image(param->mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGTH);
 	param->menu_ptr = mlx_xpm_file_to_image(param->mlx_ptr, "menu.xpm", &endian, &bits);
-	param->s = mlx_get_data_addr(param->img_ptr, &bits, &(param->size), &endian);
+	param->s = (unsigned char*)mlx_get_data_addr(param->img_ptr, &bits, &(param->size), &endian);
 }
 
 static void	usage_msg(void)
@@ -88,7 +88,7 @@ int		main(int argc, char **argv)
 		colors.top = argv[4];
 	}
 	mlx_setup(argv[1], &param, &colors);
-	standard_placement(&param, AT_MULT, &colors);
+	standard_placement(&param, AT_MULT);
 	mlx_key_hook(param.win_ptr, keyboard_f, (void*)(&param));
 	mlx_mouse_hook(param.win_ptr, mouse_f, (void*)(&param));
 	mlx_loop(param.mlx_ptr);

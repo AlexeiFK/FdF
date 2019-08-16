@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   transparent.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/08/16 18:48:39 by rjeor-mo          #+#    #+#             */
+/*   Updated: 2019/08/16 18:48:41 by rjeor-mo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include <limits.h>
 #include <float.h>
@@ -8,39 +19,69 @@
 #include "mlx.h"
 #include "libft.h"
 
-/*
-void	print_dots(t_param *param, t_dot *dot)
+void		swap_box(t_box *box1, t_box *box2)
 {
-	int i;
-	int zzz;
-	int	xxx;
-	char	*s1;
-	char	*s;
+	t_dot	*d1;
+	t_dot	*d2;
+	t_dot	*d3;
+	t_dot	*d4;
+	int	ctr;
 
-	i = 0;
-	while (dot)
+	d1 = box1->dot1;
+	d2 = box1->dot2;
+	d3 = box1->dot3;
+	d4 = box1->dot4;
+	ctr = box1->ctr;
+	box1->dot1 = box2->dot1;
+	box1->dot2 = box2->dot2;
+	box1->dot3 = box2->dot3;
+	box1->dot4 = box2->dot4;
+	box1->ctr = box2->ctr;
+	box2->dot1 = d1;
+	box2->dot2 = d2;
+	box2->dot3 = d3;
+	box2->dot4 = d4;
+	box2->ctr = ctr;
+}
+
+void		sort_box(t_box *box)
+{
+	t_box	*tmpi;
+	t_box	*tmpj;
+
+	tmpi = box;
+	while (tmpi)
 	{
-//		zzz = (int)dot->x;
-		xxx = (int)dot->dep;
-//		s1 = ft_strjoin(ft_itoa(zzz), "=x | dep=");
-		s = ft_strjoin("d", ft_itoa(xxx));
-//		printf("(%d)x[%f]y[%f]z[%f]\n", i, dot->x, dot->y, dot->z);
-		mlx_string_put(param->mlx_ptr, param->win_ptr, (int)dot->x, (int)dot->y, 0xffffff, s);
-		dot = dot->next;
-		i++;
+		tmpj = box;
+		while (tmpj->next)
+		{
+			if (tmpj->ctr > tmpj->next->ctr)
+				swap_box(tmpj, tmpj->next);
+			tmpj = tmpj->next;
+		}
+		tmpi = tmpi->next;
 	}
 }
-*/
 
-void	ch_pixel_put(t_param *param, int x, int y, t_spec *c)
+void		draw_box_new(t_param *param, t_box *box, char diags)
 {
-	unsigned char	*s;
-
-	s = param->s;
-	s += (param->size * y);
-	s[x * 4] = c->b;
-	s[x * 4 + 1] = c->g;
-	s[x * 4 + 2] = c->r;
+	while (box)
+	{
+		draw_box_n(param, box->dot1, box->dot2, box->dot3, 0);
+		draw_box_n(param, box->dot2, box->dot1, box->dot4, 0);
+		draw_box_n(param, box->dot3, box->dot1, box->dot4, 0);
+		draw_box_n(param, box->dot4, box->dot2, box->dot3, 0);
+		draw_line_t(param, box->dot1, box->dot2);
+		draw_line_t(param, box->dot1, box->dot3);
+		draw_line_t(param, box->dot3, box->dot4);
+		draw_line_t(param, box->dot2, box->dot4);
+		if (diags)
+		{
+			draw_line_t(param, box->dot1, box->dot4);
+			draw_line_t(param, box->dot3, box->dot2);
+		}
+		box = box->next;
+	}
 }
 
 void	get_dep(t_param *param)
@@ -63,16 +104,12 @@ void	get_dep(t_param *param)
 
 void	tp_dot(t_param *param, char diag)
 {
-	static int	is_new = 1;
 	get_dep(param);
 	ft_bzero(param->s, 4 * WINDOW_HEIGTH * WINDOW_WIDTH);
-	if (/*is_new ==*/ 1)
-	{
-		is_new = 0;
-		param->box = create_box(param);
-	}
+	param->box = create_box(param);
 	sort_box(param->box);
 	draw_box_new(param, param->box, diag);
+	free_box(&param->box);
 	mlx_put_image_to_window(param->mlx_ptr, param->win_ptr, param->img_ptr, 0, 0); // destroy and yatayatayta
 	draw_menu(param, 0xffffff);
 }

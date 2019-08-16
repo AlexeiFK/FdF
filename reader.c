@@ -6,7 +6,7 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 19:40:40 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/04/04 19:37:28 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/08/16 17:37:20 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,13 +69,15 @@ t_dot	*ft_reader(char *filename, t_colors *color)
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 		error_file_msg();
-	while (get_next_line(fd, &str) > 0)
+	while ((ret = get_next_line(fd, &str)) > 0)
 	{
 		split = ft_strsplit(str, ' ');
 		free(str);
 		str_to_dots(split, &dots);
 		free(split); // normalnii free dlya char**
 	}
+	if (ret == -1)
+		error_file_msg();
 	if (color)
 		ft_colorize(dots, color);
 	return (dots);
