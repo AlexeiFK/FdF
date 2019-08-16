@@ -6,7 +6,7 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 19:40:40 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/08/16 17:37:20 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/08/16 21:19:35 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ void	str_to_dots(char **split, t_dot **dots)
 	col++;
 }
 
-
 void	ft_cpy(t_dot **new, t_dot *dot)
 {
 	t_dot	*tmp;
@@ -57,6 +56,19 @@ static void	error_file_msg(void)
 	exit(0);
 }
 
+void	free_split(char **split)
+{
+	int		i;
+
+	i = 0;
+	while (split[i] != NULL)
+	{
+		free(split[i]);
+		i++;
+	}
+	free(split);
+}
+
 t_dot	*ft_reader(char *filename, t_colors *color)
 {
 	int		fd;
@@ -74,7 +86,7 @@ t_dot	*ft_reader(char *filename, t_colors *color)
 		split = ft_strsplit(str, ' ');
 		free(str);
 		str_to_dots(split, &dots);
-		free(split); // normalnii free dlya char**
+		free_split(split);
 	}
 	if (ret == -1)
 		error_file_msg();

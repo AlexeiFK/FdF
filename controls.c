@@ -6,7 +6,7 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/16 18:58:03 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/08/16 20:43:16 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/08/16 21:08:39 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int		keyboard_f(int keycode, void *param)
 		tp_dot(param, 1);
 	}
 	if (keycode == ESC)
-		exit(0);
+		free_and_exit(param);
 	refresh_screen(param, is_trs);
 	return (0);
 }
@@ -114,7 +114,7 @@ void		menu_handler(void *param, int x, int y, int *is_trs)
 		tp_dot(param, 1);
 	}
 	if (x > 1 && x < 101 && y > 375 && y < 395)
-		exit(0);
+		free_and_exit(param);
 }
 
 int		mouse_f(int buttom, int x, int y, void *param)

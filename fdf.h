@@ -6,7 +6,7 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 21:01:22 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/08/16 20:55:04 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/08/16 21:09:05 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,4 +115,6 @@ void		rot_net_dot(t_param *param, float angle, char axis);
 void		ox_rot(t_dot *dot, float a);
 void		oy_rot(t_dot *dot, float a);
 void		oz_rot(t_dot *dot, float a);
+
+void		free_and_exit(t_param *param);
 #endif
