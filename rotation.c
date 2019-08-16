@@ -7,6 +7,9 @@ void	ox_rot(t_dot *dot, float a)
 	float y;
 	float z;
 
+
+	/* float cos = cosf()
+	 * float sin = sinf()*/
 	while (dot)
 	{
 		y = dot->y;
