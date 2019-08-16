@@ -6,7 +6,7 @@
 #    By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/02 22:26:26 by rjeor-mo          #+#    #+#              #
-#    Updated: 2019/04/04 13:11:43 by rjeor-mo         ###   ########.fr        #
+#    Updated: 2019/08/16 17:29:39 by rjeor-mo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,18 +23,18 @@ MINILIB = -L minilibx_macos/ -lmlx
 FRAMEW = -framework OpenGL -framework Appkit
 
 CFILES = main.c primitives.c draw.c reader.c get_next_line.c \
-		 screen.c convert.c
+		 screen.c convert.c  screen2.c controls.c menu.c transparent.c box.c draw_box.c colorize.c rotation.c
 
 OBJ = $(CFILES:%.c=%.o)
 
 all: $(NAME)
 
-$(NAME): $(OBJ) fdf.h
+$(NAME): $(OBJ) fdf.h config.h
 	make -C libft
 	make -C minilibx_macos
 	gcc $(FLAGS) $(OBJ) -o $(NAME) -Iminilibx_macos $(LIBFT) $(MINILIB) $(FRAMEW)
 
-$(OBJ): $(SRC)
+$(OBJ): $(CFILES) fdf.h config.h
 	gcc $(FLAGS) -c $(CFILES) -Ilibft -Iminilibx_macos
 
 clean:
