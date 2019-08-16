@@ -41,6 +41,16 @@ static void	put_vert_b_new(t_dot *dot, t_param *param, int rows, t_box **box)
 	}
 }
 
+void		fill_dot()
+{
+
+}
+
+void		fill_box_info(t_param *param)
+{
+
+}
+
 t_box		*create_box(t_param *param)
 {
 	t_dot	*tmp;
@@ -55,13 +65,9 @@ t_box		*create_box(t_param *param)
 	while (dot->next)
 	{
 		if (dot->row == dot->next->row)
-		{
 			n_rows++;
-		}
 		else
-		{
 			n_rows = 1;
-		}
 		dot = dot->next;
 	}
 	put_vert_b_new(tmp, param, n_rows, &new);

@@ -63,9 +63,14 @@ void	get_dep(t_param *param)
 
 void	tp_dot(t_param *param, char diag)
 {
+	static int	is_new = 1;
 	get_dep(param);
 	ft_bzero(param->s, 4 * WINDOW_HEIGTH * WINDOW_WIDTH);
-	param->box = create_box(param);
+	if (/*is_new ==*/ 1)
+	{
+		is_new = 0;
+		param->box = create_box(param);
+	}
 	sort_box(param->box);
 	draw_box_new(param, param->box, diag);
 	mlx_put_image_to_window(param->mlx_ptr, param->win_ptr, param->img_ptr, 0, 0); // destroy and yatayatayta
