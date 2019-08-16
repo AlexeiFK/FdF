@@ -6,7 +6,7 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/16 18:57:44 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/08/16 19:43:25 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/08/16 20:07:43 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,12 @@ void	refresh_screen(t_param *param, int is_trs)
 void	ch_pixel_put(t_param *param, int x, int y, t_spec *c)
 {
 	unsigned char	*s;
+	int				xm;
 
+	xm = x * 4;
 	s = param->s;
 	s += (param->size * y);
-	s[x * 4] = c->b;
-	s[x * 4 + 1] = c->g;
-	s[x * 4 + 2] = c->r;
+	s[xm] = c->b;
+	s[xm + 1] = c->g;
+	s[xm + 2] = c->r;
 }

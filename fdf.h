@@ -6,7 +6,7 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 21:01:22 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/08/16 19:40:03 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/08/16 20:09:03 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,65 +15,55 @@
 
 #include "config.h"
 
-typedef struct			s_state
-{
-	int			shift;
-	float			zoom;
-	float			rot_x;
-	float			rot_y;
-	float			rot_z;
-}				t_state;
-
-typedef struct			s_spec
+typedef struct		s_spec
 {
 	float			r;
 	float			g;
 	float			b;
-}				t_spec;
+}					t_spec;
 
 typedef struct		s_dot
 {
-	float				x;
-	float				y;
-	float				z;
+	float			x;
+	float			y;
+	float			z;
 	int				dep;
 	int				row;
 	int				color;
-	struct s_dot			*next;
+	struct s_dot	*next;
 }					t_dot;
 
 typedef struct		s_box
 {
-	t_dot		*dot1;
-	t_dot		*dot2;
-	t_dot		*dot3;
-	t_dot		*dot4;
-	int		ctr;
+	t_dot			*dot1;
+	t_dot			*dot2;
+	t_dot			*dot3;
+	t_dot			*dot4;
+	int				ctr;
 	struct s_box	*next;
-}			t_box;
+}					t_box;
 
 typedef struct		s_colors
 {
-	char*		menu;
-	char*		top;
-	char*		mid;
-	char*		bot;
-}			t_colors;
+	char*			menu;
+	char*			top;
+	char*			mid;
+	char*			bot;
+}					t_colors;
 
 typedef struct		s_param
 {
-	void		*mlx_ptr;
-	void		*win_ptr;
-	void		*img_ptr;
-	void		*menu_ptr;
-	t_state		*cur_st;
-	t_dot		*dot;
-	t_dot		*res;
-	t_box		*box;
-	t_colors	*clr;
+	void			*mlx_ptr;
+	void			*win_ptr;
+	void			*img_ptr;
+	void			*menu_ptr;
 	unsigned char	*s;
-	int		size;
-}			t_param;
+	int				size;
+	t_dot			*dot;
+	t_dot			*res;
+	t_box			*box;
+	t_colors		*clr;
+}					t_param;
 
 t_dot		*create_dot(int x, int y, int z, int c);
 t_box		*create_box(t_param *param);
