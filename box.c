@@ -6,7 +6,7 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/16 18:19:21 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/08/16 18:47:54 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/08/16 22:19:22 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "mlx.h"
 #include "config.h"
 
-t_box		*new_box()
+t_box		*new_box(void)
 {
 	t_box *new;
 
@@ -43,31 +43,32 @@ void		free_box(t_box **box)
 	*box = NULL;
 }
 
-static void	setup_box_info(t_dot *dot, int rows, t_box **box)
+static void	setup_box_info(t_dot *d, int rows, t_box **box, t_dot *dp)
 {
-	t_dot	*dotp;
 	t_box	*tmp;
 
-	dotp = dot;
-	while (dotp->next && (rows))
+	dp = d;
+	while (dp->next && (rows))
 	{
-		dotp = dotp->next;
+		dp = dp->next;
 		rows--;
 	}
-	while (dotp->next && dot->next)
+	while (dp->next && d->next)
 	{
-		if (dot->row == dot->next->row)
+		if (d->row == d->next->row)
 		{
 			tmp = new_box();
-			tmp->dot1 = create_dot(dot->x, dot->y, dot->z, dot->color);
-			tmp->dot2 = create_dot(dotp->x, dotp->y, dotp->z, dotp->color);
-			tmp->dot3 = create_dot(dot->next->x, dot->next->y, dot->next->z, dot->next->color);
-			tmp->dot4 = create_dot(dotp->next->x, dotp->next->y, dotp->next->z, dotp->next->color);
-			tmp->ctr = ((dot->dep + dotp->dep + dot->next->dep + dotp->next->dep) / 4);
+			tmp->dot1 = create_dot(d->x, d->y, d->z, d->color);
+			tmp->dot2 = create_dot(dp->x, dp->y, dp->z, dp->color);
+			tmp->dot3 = create_dot(d->next->x,
+					d->next->y, d->next->z, d->next->color);
+			tmp->dot4 = create_dot(dp->next->x,
+					dp->next->y, dp->next->z, dp->next->color);
+			tmp->ctr = ((d->dep + dp->dep + d->next->dep + dp->next->dep) / 4);
 			add_box(box, tmp);
 		}
-		dot = dot->next;
-		dotp = dotp->next;
+		d = d->next;
+		dp = dp->next;
 	}
 }
 
@@ -77,7 +78,9 @@ t_box		*create_box(t_param *param)
 	int		n_rows;
 	t_dot	*dot;
 	t_box	*new;
+	t_dot	*norminate;
 
+	norminate = NULL;
 	dot = param->dot;
 	n_rows = 1;
 	tmp = dot;
@@ -90,8 +93,6 @@ t_box		*create_box(t_param *param)
 			n_rows = 1;
 		dot = dot->next;
 	}
-	setup_box_info(tmp, n_rows, &new);
+	setup_box_info(tmp, n_rows, &new, norminate);
 	return (new);
 }
-
-

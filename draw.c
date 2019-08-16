@@ -6,7 +6,7 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/29 21:36:57 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/04/04 20:51:54 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/08/16 21:42:03 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include "libft.h"
 #include "config.h"
 
-int		get_inc_n_maxp(t_dot *dot1, t_dot *dot2, float *inc_x, float *inc_y)
+int			get_inc_n_maxp(t_dot *dot1, t_dot *dot2, float *inc_x, float *inc_y)
 {
 	float		dif_x;
 	float		dif_y;
@@ -42,7 +42,8 @@ int		get_inc_n_maxp(t_dot *dot1, t_dot *dot2, float *inc_x, float *inc_y)
 	}
 }
 
-void		get_color_inc(int n_pixels, unsigned int color1, unsigned int color2, t_spec *inc)
+void		get_color_inc(int n_pixels,
+		unsigned int color1, unsigned int color2, t_spec *inc)
 {
 	t_spec	s1;
 	t_spec	s2;
@@ -65,7 +66,6 @@ void		inc_st_color(t_spec *c, t_spec *inc)
 	c->b += inc->b;
 }
 
-
 void		get_spec(t_spec *s, unsigned int color)
 {
 	s->r = (color & 0xff0000) >> 16;
@@ -79,7 +79,7 @@ void		draw_line_t(t_param *param, t_dot *dot1, t_dot *dot2)
 	float		st_xy[2];
 	t_spec		st_c;
 	t_spec		inc_c;
-	int		n_pixels;
+	int			n_pixels;
 
 	n_pixels = get_inc_n_maxp(dot1, dot2, &inc_xy[0], &inc_xy[1]);
 	st_xy[0] = dot1->x;
@@ -88,7 +88,8 @@ void		draw_line_t(t_param *param, t_dot *dot1, t_dot *dot2)
 	get_color_inc(n_pixels, dot1->color, dot2->color, &inc_c);
 	while (n_pixels >= 0)
 	{
-		if ((st_xy[0] > 0) && (st_xy[1] > 0) && (st_xy[1] < WINDOW_HEIGTH) && (st_xy[0] < WINDOW_WIDTH)) 
+		if ((st_xy[0] > 0) && (st_xy[1] > 0) &&
+				(st_xy[1] < WINDOW_HEIGTH) && (st_xy[0] < WINDOW_WIDTH))
 			ch_pixel_put(param, (int)st_xy[0], (int)st_xy[1], &st_c);
 		inc_st_color(&st_c, &inc_c);
 		st_xy[0] += inc_xy[0];
@@ -96,5 +97,3 @@ void		draw_line_t(t_param *param, t_dot *dot1, t_dot *dot2)
 		--n_pixels;
 	}
 }
-
-

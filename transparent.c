@@ -6,7 +6,7 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/16 18:48:39 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/08/16 21:30:59 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/08/16 22:05:36 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,10 @@ void		draw_box_new(t_param *param, t_box *box, char diags)
 {
 	while (box)
 	{
-		draw_box_n(param, box->dot1, box->dot2, box->dot3, 0);
-		draw_box_n(param, box->dot2, box->dot1, box->dot4, 0);
-		draw_box_n(param, box->dot3, box->dot1, box->dot4, 0);
-		draw_box_n(param, box->dot4, box->dot2, box->dot3, 0);
+		draw_box_n(param, box->dot1, box->dot2, box->dot3);
+		draw_box_n(param, box->dot2, box->dot1, box->dot4);
+		draw_box_n(param, box->dot3, box->dot1, box->dot4);
+		draw_box_n(param, box->dot4, box->dot2, box->dot3);
 		draw_line_t(param, box->dot1, box->dot2);
 		draw_line_t(param, box->dot1, box->dot3);
 		draw_line_t(param, box->dot3, box->dot4);

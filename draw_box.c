@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw_box.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/08/16 22:03:35 by rjeor-mo          #+#    #+#             */
+/*   Updated: 2019/08/16 22:05:53 by rjeor-mo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include <stdlib.h>
 #include "mlx.h"
@@ -6,11 +17,10 @@
 #include "libft.h"
 #include "config.h"
 
-
 static int	get_inc_n_maxb(int *n_pixels, float *inc_xy)
 {
 	float		f_pixels[2];
-	int		max;
+	int			max;
 	float		dev;
 
 	if (n_pixels[1] > n_pixels[0])
@@ -49,13 +59,13 @@ static void	fill_start(float *st_xy, t_dot *dot1)
 	st_xy[3] = dot1->y;
 }
 
-void		draw_box_n(t_param *param, t_dot *dot1, t_dot *dot2, t_dot *dot3, int color)
+void		draw_box_n(t_param *param, t_dot *dot1, t_dot *dot2, t_dot *dot3)
 {
 	float		inc_xy[4];
 	float		st_xy[4];
 	t_dot		tmp_d[2];
-	int		n_pixels[2];
-	int		max;
+	int			n_pixels[2];
+	int			max;
 
 	n_pixels[0] = get_inc_n_maxp(dot1, dot2, &inc_xy[0], &inc_xy[1]);
 	n_pixels[1] = get_inc_n_maxp(dot1, dot3, &inc_xy[2], &inc_xy[3]);
@@ -64,9 +74,9 @@ void		draw_box_n(t_param *param, t_dot *dot1, t_dot *dot2, t_dot *dot3, int colo
 	while (max >= 0)
 	{
 		fill_dot(&tmp_d[0], st_xy[0], st_xy[1], dot1->dep);
-		tmp_d[0].color = color;
+		tmp_d[0].color = 0;
 		fill_dot(&tmp_d[1], st_xy[2], st_xy[3], dot2->dep);
-		tmp_d[1].color = color;
+		tmp_d[1].color = 0;
 		draw_line_t(param, &tmp_d[0], &tmp_d[1]);
 		st_xy[0] += inc_xy[0];
 		st_xy[1] += inc_xy[1];

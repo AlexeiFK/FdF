@@ -6,7 +6,7 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/26 22:33:58 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/08/16 21:34:27 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/08/16 21:47:07 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ static void	standard_placement(t_param *param, float zmult)
 {
 	float	x;
 	float	y;
-	int	shx;
-	int	shy;
+	int		shx;
+	int		shy;
 	float	min;
 
 	x = param->dot->x;
@@ -56,16 +56,19 @@ static void	mlx_setup(char *filename, t_param *param, t_colors *colors)
 	ft_cpy(&(param->res), param->dot);
 	param->clr = colors;
 	param->mlx_ptr = mlx_init();
-	param->win_ptr = mlx_new_window(param->mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGTH, W_NAME);
+	param->win_ptr =
+		mlx_new_window(param->mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGTH, W_NAME);
 	param->img_ptr = mlx_new_image(param->mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGTH);
-	param->menu_ptr = mlx_xpm_file_to_image(param->mlx_ptr, "menu.xpm", &endian, &bits);
+	param->menu_ptr =
+		mlx_xpm_file_to_image(param->mlx_ptr, "menu.xpm", &endian, &bits);
 	param->mult = 1;
-	param->s = (unsigned char*)mlx_get_data_addr(param->img_ptr, &bits, &(param->size), &endian);
+	param->s = (unsigned char*)
+		mlx_get_data_addr(param->img_ptr, &bits, &(param->size), &endian);
 }
 
-int		main(int argc, char **argv)
+int			main(int argc, char **argv)
 {
-	t_param 	param;
+	t_param		param;
 	t_colors	colors;
 
 	colors.bot = NULL;

@@ -6,7 +6,7 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/16 18:57:44 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/08/16 20:07:43 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/08/16 21:38:35 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ void	refresh_screen(t_param *param, int is_trs)
 {
 	if (is_trs == 0)
 		net_dot_c(param);
-	mlx_put_image_to_window(param->mlx_ptr, param->win_ptr, param->img_ptr, 0, 0);
+	mlx_put_image_to_window(param->mlx_ptr,
+			param->win_ptr, param->img_ptr, 0, 0);
 	draw_menu(param, 0xffffff);
 	ft_bzero(param->s, 4 * WINDOW_HEIGTH * WINDOW_WIDTH);
 }
