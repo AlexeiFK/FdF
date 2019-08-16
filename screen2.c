@@ -6,7 +6,7 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/16 18:55:48 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/08/16 19:01:29 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/08/16 19:16:23 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,25 +19,16 @@
 
 void	sh_net_dot(t_param *param, int x, int y, int z)
 {
-	ft_bzero(param->s, 4 * WINDOW_HEIGTH * WINDOW_WIDTH);
 	shift(param->dot, x, y, z);
-	net_dot_c(param);
-	mlx_put_image_to_window(param->mlx_ptr, param->win_ptr, param->img_ptr, 0, 0); // destroy and yatayatayta
-	draw_menu(param, 0xffffff);
 }
 
 void	zm_net_dot(t_param *param, float mult, int x, int y)
 {
-	ft_bzero(param->s, 4 * WINDOW_HEIGTH * WINDOW_WIDTH);
 	zoom(param->dot, mult, x, y);
-	net_dot_c(param);
-	mlx_put_image_to_window(param->mlx_ptr, param->win_ptr, param->img_ptr, 0, 0); // destroy and yatayatayta
-	draw_menu(param, 0xffffff);
 }
 
 void	rot_net_dot(t_param *param, float angle, char axis)
 {
-	ft_bzero(param->s, 4 * WINDOW_HEIGTH * WINDOW_WIDTH);
 	shift(param->dot, -WINDOW_W_C, -WINDOW_H_C, 0);
 	if (axis == 'x')
 		ox_rot(param->dot, angle);
@@ -51,20 +42,13 @@ void	rot_net_dot(t_param *param, float angle, char axis)
 		ox_rot(param->dot, asin(tan(M_PI / 6)));
 	}
 	shift(param->dot, WINDOW_W_C, WINDOW_H_C, 0);
-	net_dot_c(param);
-	mlx_put_image_to_window(param->mlx_ptr, param->win_ptr, param->img_ptr, 0, 0); // destroy and yatayatayta
-	draw_menu(param, 0xffffff);
 }
 
 void	new_net_dot(t_param *param)
 {
-	ft_bzero(param->s, 4 * WINDOW_HEIGTH * WINDOW_WIDTH);
 	free(param->dot);
 	param->dot = NULL;	//norm free
 	ft_cpy(&(param->dot), param->res);
-	net_dot_c(param);
-	mlx_put_image_to_window(param->mlx_ptr, param->win_ptr, param->img_ptr, 0, 0); // destroy and yatayatayta
-	draw_menu(param, 0xffffff);
 }
 
 void	zx_net_dot(t_param *param, float mult)
@@ -72,13 +56,9 @@ void	zx_net_dot(t_param *param, float mult)
 	static float	m = 1;
 
 	m *= mult;
-	ft_bzero(param->s, 4 * WINDOW_HEIGTH * WINDOW_WIDTH);
 	free(param->dot);
 	param->dot = NULL;	//norm free
 	ft_cpy(&(param->dot), param->res);
 	zoom_z(param->dot, 1, m);
 	rot_net_dot(param, 0, 'i');
-	net_dot_c(param);
-	mlx_put_image_to_window(param->mlx_ptr, param->win_ptr, param->img_ptr, 0, 0); // destroy and yatayatayta
-	draw_menu(param, 0xffffff);
 }

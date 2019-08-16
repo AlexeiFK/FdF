@@ -6,7 +6,7 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 21:01:22 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/08/16 18:47:17 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/08/16 19:40:03 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,7 @@ void		draw_line_ch(t_param *param, t_dot *dot1, t_dot *dot2);
 void		draw_box_n(t_param *param, t_dot *dot1, t_dot *dot2, t_dot *dot3, int z);
 void		ch_pixel_put_d(t_param *param, int x, int y, int z);
 void		sort_box(t_box *box);
+void		refresh_screen(t_param *param, int is_transp);
 
 void		clear_and_rest(t_param *param);
 void		draw_box(t_param *param, t_dot *dot1, t_dot *dot4, int color);

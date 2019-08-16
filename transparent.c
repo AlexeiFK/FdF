@@ -6,7 +6,7 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/16 18:48:39 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/08/16 18:48:41 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/08/16 19:43:26 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,11 +105,8 @@ void	get_dep(t_param *param)
 void	tp_dot(t_param *param, char diag)
 {
 	get_dep(param);
-	ft_bzero(param->s, 4 * WINDOW_HEIGTH * WINDOW_WIDTH);
 	param->box = create_box(param);
 	sort_box(param->box);
 	draw_box_new(param, param->box, diag);
 	free_box(&param->box);
-	mlx_put_image_to_window(param->mlx_ptr, param->win_ptr, param->img_ptr, 0, 0); // destroy and yatayatayta
-	draw_menu(param, 0xffffff);
 }

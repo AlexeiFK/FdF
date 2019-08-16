@@ -6,7 +6,7 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/26 22:33:58 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/08/16 17:35:21 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/08/16 19:45:23 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,7 @@ static void	standard_placement(t_param *param, float zmult)
 	shy = (WINDOW_HEIGTH / 2) - (y * min / 2);
 	shift(param->dot, shx, shy, 0);
 	shift(param->res, shx, shy, 0);
-	net_dot_c(param);
-	mlx_put_image_to_window(param->mlx_ptr, param->win_ptr, param->img_ptr, 0, 0);
-	draw_menu(param, 0xFFFFFF);
+	refresh_screen(param, 0);
 }
 
 static void	mlx_setup(char *filename, t_param *param, t_colors *colors)
