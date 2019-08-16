@@ -6,7 +6,7 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 21:01:22 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/08/16 20:09:03 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/08/16 20:55:04 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ typedef struct		s_param
 	void			*menu_ptr;
 	unsigned char	*s;
 	int				size;
+	float			mult;
 	t_dot			*dot;
 	t_dot			*res;
 	t_box			*box;

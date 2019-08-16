@@ -6,7 +6,7 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/26 22:33:58 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/08/16 19:45:23 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/08/16 20:49:35 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ static void	mlx_setup(char *filename, t_param *param, t_colors *colors)
 	param->win_ptr = mlx_new_window(param->mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGTH, W_NAME);
 	param->img_ptr = mlx_new_image(param->mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGTH);
 	param->menu_ptr = mlx_xpm_file_to_image(param->mlx_ptr, "menu.xpm", &endian, &bits);
+	param->mult = 1;
 	param->s = (unsigned char*)mlx_get_data_addr(param->img_ptr, &bits, &(param->size), &endian);
 }
 
