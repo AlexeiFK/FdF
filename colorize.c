@@ -6,13 +6,12 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/16 22:06:47 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/08/16 22:07:52 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/08/17 23:14:04 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "fdf.h"
-#include "get_next_line.h"
+#include <stdlib.h>
 
 void	find_max_min(t_dot *dot, int *max, int *min)
 {

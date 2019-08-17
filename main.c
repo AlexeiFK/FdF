@@ -6,19 +6,13 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/26 22:33:58 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/08/16 21:47:07 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/08/17 23:18:37 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <limits.h>
-#include <float.h>
 #include "mlx.h"
-#include <math.h>
 #include "fdf.h"
 #include <stdlib.h>
-#include <stdio.h>
-#include "libft.h"
-#include "config.h"
 
 static void	standard_placement(t_param *param, float zmult)
 {
@@ -84,7 +78,8 @@ int			main(int argc, char **argv)
 	}
 	mlx_setup(argv[1], &param, &colors);
 	standard_placement(&param, AT_MULT);
-	mlx_key_hook(param.win_ptr, keyboard_f, (void*)(&param));
+	mlx_key_hook(param.win_ptr, keyboard_f_norep, (void*)(&param));
+	mlx_hook(param.win_ptr, 2, 2, keyboard_f, (void*)(&param));
 	mlx_mouse_hook(param.win_ptr, mouse_f, (void*)(&param));
 	mlx_loop(param.mlx_ptr);
 	return (0);

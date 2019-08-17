@@ -6,15 +6,12 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/16 18:19:21 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/08/16 22:19:22 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/08/17 23:11:07 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include <stdlib.h>
 #include "fdf.h"
-#include "mlx.h"
-#include "config.h"
 
 t_box		*new_box(void)
 {

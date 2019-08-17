@@ -6,16 +6,11 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/16 22:03:35 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/08/16 22:05:53 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/08/17 23:15:45 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include "mlx.h"
-#include <math.h>
 #include "fdf.h"
-#include "libft.h"
-#include "config.h"
 
 static int	get_inc_n_maxb(int *n_pixels, float *inc_xy)
 {

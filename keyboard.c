@@ -6,11 +6,10 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/16 21:59:58 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/08/16 22:02:11 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/08/17 23:17:26 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx.h"
 #include "fdf.h"
 #include "config.h"
 #include <math.h>
@@ -26,31 +25,27 @@ static void	keyboard_f_ext(int keycode, void *param)
 	if (keycode == LEFT)
 		sh_net_dot(param, SENS_HOR, 0, 0);
 	if (keycode == QKEY)
-		rot_net_dot(param, M_PI / 30, 'x');
+		rot_net_dot(param, SENS_ROT_K, 'x');
 	if (keycode == WKEY)
-		rot_net_dot(param, -(M_PI / 30), 'x');
+		rot_net_dot(param, -SENS_ROT_K, 'x');
 	if (keycode == AKEY)
-		rot_net_dot(param, M_PI / 30, 'y');
+		rot_net_dot(param, SENS_ROT_K, 'y');
 	if (keycode == SKEY)
-		rot_net_dot(param, -(M_PI / 30), 'y');
+		rot_net_dot(param, -SENS_ROT_K, 'y');
 	if (keycode == ZKEY)
-		rot_net_dot(param, M_PI / 30, 'z');
+		rot_net_dot(param, SENS_ROT_K, 'z');
 	if (keycode == XKEY)
-		rot_net_dot(param, -(M_PI / 30), 'z');
+		rot_net_dot(param, SENS_ROT_K, 'z');
+	if (keycode == KEY1)
+		zx_net_dot(param, SENS_ZOOM_IN);
+	if (keycode == KEY2)
+		zx_net_dot(param, SENS_ZOOM_OUT);
 }
 
-static void	keyboard_f_ext_ext(int keycode, void *param)
+static void	keyboard_f_norep_ext(int keycode, void *param)
 {
-	if (keycode == KEY1)
-		zx_net_dot(param, 1.1);
-	if (keycode == KEY2)
-		zx_net_dot(param, 0.9);
 	if (keycode == KEY3)
 		zx_net_dot(param, -1);
-	if (keycode == EKEY)
-		zm_net_dot(param, SENS_ZOOM_IN, WINDOW_W_C, WINDOW_H_C);
-	if (keycode == RKEY)
-		zm_net_dot(param, SENS_ZOOM_OUT, WINDOW_W_C, WINDOW_H_C);
 	if (keycode == IKEY)
 	{
 		new_net_dot(param);
@@ -58,15 +53,27 @@ static void	keyboard_f_ext_ext(int keycode, void *param)
 	}
 	if (keycode == SPACE)
 		new_net_dot(param);
+	if (keycode == ESC)
+		free_and_exit(param);
 }
 
 int			keyboard_f(int keycode, void *param)
 {
+	keyboard_f_ext(keycode, param);
+	if (keycode == EKEY)
+		zm_net_dot(param, SENS_ZOOM_IN, WINDOW_W_C, WINDOW_H_C);
+	if (keycode == RKEY)
+		zm_net_dot(param, SENS_ZOOM_OUT, WINDOW_W_C, WINDOW_H_C);
+	refresh_screen(param, 0);
+	return (0);
+}
+
+int			keyboard_f_norep(int keycode, void *param)
+{
 	int		is_trs;
 
 	is_trs = 0;
-	keyboard_f_ext(keycode, param);
-	keyboard_f_ext_ext(keycode, param);
+	keyboard_f_norep_ext(keycode, param);
 	if (keycode == TKEY)
 	{
 		is_trs = 1;
@@ -77,8 +84,6 @@ int			keyboard_f(int keycode, void *param)
 		is_trs = 1;
 		tp_dot(param, 1);
 	}
-	if (keycode == ESC)
-		free_and_exit(param);
 	refresh_screen(param, is_trs);
 	return (0);
 }

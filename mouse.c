@@ -6,13 +6,11 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/16 22:00:20 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/08/16 22:03:06 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/08/17 23:19:29 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx.h"
 #include "fdf.h"
-#include "config.h"
 #include <math.h>
 
 static void	menu_handler_ext(void *param, int x, int y)
@@ -24,17 +22,17 @@ static void	menu_handler_ext(void *param, int x, int y)
 	if (x > 1 && x < 101 && y > 135 && y < 155)
 		zx_net_dot(param, -1);
 	if (x > 1 && x < 50 && y > 225 && y < 245)
-		rot_net_dot(param, -M_PI / 32, 'x');
+		rot_net_dot(param, -SENS_ROT_M, 'x');
 	if (x > 1 && x < 50 && y > 245 && y < 265)
-		rot_net_dot(param, -M_PI / 32, 'y');
+		rot_net_dot(param, -SENS_ROT_M, 'y');
 	if (x > 1 && x < 50 && y > 265 && y < 290)
-		rot_net_dot(param, -M_PI / 32, 'z');
+		rot_net_dot(param, -SENS_ROT_M, 'z');
 	if (x > 50 && x < 101 && y > 225 && y < 245)
-		rot_net_dot(param, M_PI / 32, 'x');
+		rot_net_dot(param, SENS_ROT_M, 'x');
 	if (x > 50 && x < 101 && y > 245 && y < 265)
-		rot_net_dot(param, M_PI / 32, 'y');
+		rot_net_dot(param, SENS_ROT_M, 'y');
 	if (x > 50 && x < 101 && y > 265 && y < 290)
-		rot_net_dot(param, M_PI / 32, 'z');
+		rot_net_dot(param, SENS_ROT_M, 'z');
 }
 
 void		menu_handler(void *param, int x, int y, int *is_trs)
@@ -69,13 +67,13 @@ int			mouse_f(int buttom, int x, int y, void *param)
 	if (buttom == 1)
 	{
 		if (x > 1 && x < 101 && y > 25 && y < 55)
-			sh_net_dot(param, 0, SENS_VERT, 0);
+			sh_net_dot(param, 0, SENS_VERT_M, 0);
 		if (x > 51 && x < 101 && y > 55 && y < 85)
-			sh_net_dot(param, -SENS_HOR, 0, 0);
+			sh_net_dot(param, -SENS_HOR_M, 0, 0);
 		if (x > 1 && x < 50 && y > 55 && y < 85)
-			sh_net_dot(param, SENS_HOR, 0, 0);
+			sh_net_dot(param, SENS_HOR_M, 0, 0);
 		if (x > 1 && x < 101 && y > 85 && y < 115)
-			sh_net_dot(param, 0, -SENS_VERT, 0);
+			sh_net_dot(param, 0, -SENS_VERT_M, 0);
 		if (x > 1 && x < 101 && y > 155 && y < 180)
 			zm_net_dot(param, SENS_ZOOM_IN, WINDOW_W_C, WINDOW_H_C);
 		if (x > 1 && x < 101 && y > 180 && y < 205)
