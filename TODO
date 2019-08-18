@@ -9,3 +9,4 @@
 
 67. ramki dlya zooma i shifta
 99. Pixel put on if black
+100. Use 4th byte to store in draw_box()
