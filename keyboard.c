@@ -6,7 +6,7 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/16 21:59:58 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/08/17 23:17:26 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/08/19 17:30:09 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static void	keyboard_f_ext(int keycode, void *param)
 	if (keycode == ZKEY)
 		rot_net_dot(param, SENS_ROT_K, 'z');
 	if (keycode == XKEY)
-		rot_net_dot(param, SENS_ROT_K, 'z');
+		rot_net_dot(param, -SENS_ROT_K, 'z');
 	if (keycode == KEY1)
 		zx_net_dot(param, SENS_ZOOM_IN);
 	if (keycode == KEY2)

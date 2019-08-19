@@ -6,13 +6,14 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/16 18:57:44 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/08/16 21:38:35 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/08/19 18:06:11 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include "mlx.h"
 #include "libft.h"
+#include "config.h"
 
 void	refresh_screen(t_param *param, int is_trs)
 {
@@ -29,7 +30,7 @@ void	ch_pixel_put(t_param *param, int x, int y, t_spec *c)
 	unsigned char	*s;
 	int				xm;
 
-	xm = x * 4;
+	xm = x << 2;
 	s = param->s;
 	s += (param->size * y);
 	s[xm] = c->b;

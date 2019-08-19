@@ -6,12 +6,13 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/29 21:36:57 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/08/17 23:15:09 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/08/19 17:24:13 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
 #include "fdf.h"
+#include "config.h"
 
 int			get_inc_n_maxp(t_dot *dot1, t_dot *dot2, float *inc_x, float *inc_y)
 {

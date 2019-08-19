@@ -6,13 +6,13 @@
 #    By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/02 22:26:26 by rjeor-mo          #+#    #+#              #
-#    Updated: 2019/08/16 22:08:57 by rjeor-mo         ###   ########.fr        #
+#    Updated: 2019/08/19 23:14:47 by rjeor-mo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fdf
 
-FLAGS = -O2 -march=native -Wall -Wextra -Werror
+FLAGS = -Ofast -march=native -Wall -Wextra -Werror
 
 LIBFT = -L libft/ -lft
 

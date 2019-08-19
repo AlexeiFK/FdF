@@ -6,7 +6,7 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 20:49:23 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/08/17 22:41:30 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/08/19 21:49:52 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,13 @@
 # define CONFIG_H
 
 # define W_NAME "Fdf42"
-# define WINDOW_HEIGTH 800
-# define WINDOW_WIDTH 1000
+# define WINDOW_HEIGTH 1200
+# define WINDOW_WIDTH 2000
 # define WINDOW_H_M 0
 # define WINDOW_W_M WINDOW_WIDTH-100
 # define WINDOW_H_C WINDOW_HEIGTH/2
 # define WINDOW_W_C WINDOW_WIDTH/2
+# define WIN_BUF 150
 # define SENS_ROT_K M_PI/100
 # define SENS_ROT_M M_PI/28
 # define SENS_HOR 10

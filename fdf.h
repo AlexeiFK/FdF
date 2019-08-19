@@ -6,14 +6,12 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 21:01:22 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/08/17 23:09:53 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/08/19 23:05:05 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
-
-# include "config.h"
 
 typedef struct		s_spec
 {
@@ -64,6 +62,7 @@ typedef struct		s_param
 	t_dot			*res;
 	t_box			*box;
 	t_colors		*clr;
+
 }					t_param;
 
 t_dot				*ft_reader(char *filename, t_colors *color);

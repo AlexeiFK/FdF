@@ -6,7 +6,7 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/29 21:31:53 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/04/02 23:34:48 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/08/19 18:22:20 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,6 @@ t_dot	*create_dot(int x, int y, int z, int color)
 }
 
 void	add_dot(t_dot **dot, t_dot *new)
-{
-	if (!dot || !new)
-		return ;
-	new->next = *dot;
-	*dot = new;
-}
-
-void	add_box(t_box **dot, t_box *new)
 {
 	if (!dot || !new)
 		return ;

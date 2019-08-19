@@ -6,12 +6,13 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 19:40:40 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/08/16 21:33:35 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/08/19 17:23:44 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fcntl.h>
 #include "libft.h"
+#include "config.h"
 #include "fdf.h"
 #include "get_next_line.h"
 

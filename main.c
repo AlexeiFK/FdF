@@ -6,13 +6,14 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/26 22:33:58 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/08/17 23:18:37 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/08/19 23:01:15 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mlx.h"
 #include "fdf.h"
 #include <stdlib.h>
+#include "config.h"
 
 static void	standard_placement(t_param *param, float zmult)
 {
@@ -24,10 +25,10 @@ static void	standard_placement(t_param *param, float zmult)
 
 	x = param->dot->x;
 	y = param->dot->y;
-	if (((WINDOW_WIDTH - 150) / x) > ((WINDOW_HEIGTH - 150) / y))
-		min = (WINDOW_HEIGTH - 150) / y;
+	if (((WINDOW_WIDTH - WIN_BUF) / x) > ((WINDOW_HEIGTH - WIN_BUF) / y))
+		min = (WINDOW_HEIGTH - WIN_BUF) / y;
 	else
-		min = (WINDOW_WIDTH - 150) / x;
+		min = (WINDOW_WIDTH - WIN_BUF) / x;
 	zoom_z(param->dot, min, zmult);
 	zoom_z(param->res, min, zmult);
 	shx = (WINDOW_WIDTH / 2) - (x * min / 2);

@@ -1,4 +1,4 @@
-3. good names: new .c files screen2.c primitives.c
+3. good names: new .c files screen2.c primitives.c 
 8. fractal -> fdf
 9. norminate
 12. unused includes
@@ -6,7 +6,8 @@
 19. malloc errors (fractal and fdf)
 10. leaks
 	21. leak in gnl
-
-67. ramki dlya zooma i shifta
+23. testiki
+________________________________________________________________
+67. ramki dlya zooma i shifta (!)
 99. Pixel put on if black
 100. Use 4th byte to store in draw_box()

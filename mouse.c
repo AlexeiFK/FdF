@@ -6,12 +6,13 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/16 22:00:20 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/08/17 23:19:29 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/08/19 17:23:12 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include <math.h>
+#include "config.h"
 
 static void	menu_handler_ext(void *param, int x, int y)
 {

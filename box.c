@@ -6,7 +6,7 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/16 18:19:21 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/08/17 23:11:07 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/08/19 23:09:52 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,14 @@ void		free_box(t_box **box)
 		btf = tmp;
 	}
 	*box = NULL;
+}
+
+void		add_box(t_box **dot, t_box *new)
+{
+	if (!dot || !new)
+		return ;
+	new->next = *dot;
+	*dot = new;
 }
 
 static void	setup_box_info(t_dot *d, int rows, t_box **box, t_dot *dp)
