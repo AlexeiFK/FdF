@@ -6,14 +6,13 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/16 19:35:26 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/08/23 01:51:51 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/08/23 03:38:45 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mlx.h"
 #include "config.h"
 #include "fdf.h"
-
 
 void		is_hideable(t_param *param, int color, int x)
 {

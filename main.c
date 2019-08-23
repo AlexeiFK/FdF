@@ -6,7 +6,7 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/26 22:33:58 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/08/23 01:23:53 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/08/23 03:32:39 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 #include "fdf.h"
 #include <stdlib.h>
 #include "config.h"
+
+#include "libft.h"
 
 static int	find_size(t_dot *dot)
 {
@@ -25,6 +27,7 @@ static int	find_size(t_dot *dot)
 		size++;
 		dot = dot->next;
 	}
+	ft_putnbr(size);
 	return (size);
 }
 

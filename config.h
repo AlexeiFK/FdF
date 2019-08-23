@@ -6,7 +6,7 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 20:49:23 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/08/23 03:15:56 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/08/23 03:39:18 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,7 @@
 # define AT_MULT 1
 # define COLOR_OPT 1
 # define BASIC_COLOR 0xffffff
-# define HIDEABLE_MAX 10000
-
-
+# define HIDEABLE_MAX 3000
 
 # define UP 126
 # define LEFT 123
