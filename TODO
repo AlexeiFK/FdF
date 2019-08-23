@@ -1,4 +1,3 @@
-3. good names: new .c files screen2.c primitives.c 
 8. fractal -> fdf
 9. norminate
 12. unused includes
@@ -11,3 +10,6 @@ ________________________________________________________________
 67. ramki dlya zooma i shifta (!)
 99. Pixel put on if black
 100. Use 4th byte to store in draw_box()
+88. Always on screen hide
+77. dont hide if file too big
+3. good names: new .c files screen2.c primitives.c 
