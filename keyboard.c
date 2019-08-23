@@ -6,7 +6,7 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/16 21:59:58 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/08/19 17:30:09 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/08/23 03:12:55 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ static void	keyboard_f_ext(int keycode, void *param)
 	if (keycode == XKEY)
 		rot_net_dot(param, -SENS_ROT_K, 'z');
 	if (keycode == KEY1)
-		zx_net_dot(param, SENS_ZOOM_IN);
+		zx_net_dot(param, SENS_Z_MULT_IN);
 	if (keycode == KEY2)
-		zx_net_dot(param, SENS_ZOOM_OUT);
+		zx_net_dot(param, SENS_Z_MULT_OUT);
 }
 
 static void	keyboard_f_norep_ext(int keycode, void *param)
@@ -64,26 +64,19 @@ int			keyboard_f(int keycode, void *param)
 		zm_net_dot(param, SENS_ZOOM_IN, WINDOW_W_C, WINDOW_H_C);
 	if (keycode == RKEY)
 		zm_net_dot(param, SENS_ZOOM_OUT, WINDOW_W_C, WINDOW_H_C);
-	refresh_screen(param, 0);
+	refresh_screen(param);
 	return (0);
 }
 
 int			keyboard_f_norep(int keycode, void *param)
 {
-	int		is_trs;
-
-	is_trs = 0;
 	keyboard_f_norep_ext(keycode, param);
+	if (keycode == UKEY)
+		change_trs(param, 0);
 	if (keycode == TKEY)
-	{
-		is_trs = 1;
-		tp_dot(param, 0);
-	}
+		change_trs(param, 1);
 	if (keycode == YKEY)
-	{
-		is_trs = 1;
-		tp_dot(param, 1);
-	}
-	refresh_screen(param, is_trs);
+		change_trs(param, 2);
+	refresh_screen(param);
 	return (0);
 }

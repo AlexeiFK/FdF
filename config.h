@@ -6,7 +6,7 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 20:49:23 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/08/19 21:49:52 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/08/23 03:15:56 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # define WINDOW_W_M WINDOW_WIDTH-100
 # define WINDOW_H_C WINDOW_HEIGTH/2
 # define WINDOW_W_C WINDOW_WIDTH/2
-# define WIN_BUF 150
+# define WIN_BUF 400
 # define SENS_ROT_K M_PI/100
 # define SENS_ROT_M M_PI/28
 # define SENS_HOR 10
@@ -29,9 +29,15 @@
 # define SENS_VERT_M 35
 # define SENS_ZOOM_IN 1.1
 # define SENS_ZOOM_OUT 1/1.1
+# define SENS_Z_MULT_IN 1.05
+# define SENS_Z_MULT_OUT 1/1.05
 # define AT_MULT 1
 # define COLOR_OPT 1
 # define BASIC_COLOR 0xffffff
+# define HIDEABLE_MAX 10000
+
+
+
 # define UP 126
 # define LEFT 123
 # define DOWN 125
@@ -59,6 +65,7 @@
 
 # define TKEY 17
 # define YKEY 16
+# define UKEY 32
 
 # define SPACE 49
 

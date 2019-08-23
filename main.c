@@ -6,7 +6,7 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/26 22:33:58 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/08/19 23:01:15 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/08/23 01:23:53 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,19 @@
 #include "fdf.h"
 #include <stdlib.h>
 #include "config.h"
+
+static int	find_size(t_dot *dot)
+{
+	int		size;
+
+	size = 0;
+	while (dot)
+	{
+		size++;
+		dot = dot->next;
+	}
+	return (size);
+}
 
 static void	standard_placement(t_param *param, float zmult)
 {
@@ -35,7 +48,7 @@ static void	standard_placement(t_param *param, float zmult)
 	shy = (WINDOW_HEIGTH / 2) - (y * min / 2);
 	shift(param->dot, shx, shy, 0);
 	shift(param->res, shx, shy, 0);
-	refresh_screen(param, 0);
+	refresh_screen(param);
 }
 
 static void	mlx_setup(char *filename, t_param *param, t_colors *colors)
@@ -50,6 +63,7 @@ static void	mlx_setup(char *filename, t_param *param, t_colors *colors)
 		param->dot = ft_reader(filename, NULL);
 	ft_cpy(&(param->res), param->dot);
 	param->clr = colors;
+	param->file_size = find_size(param->dot);
 	param->mlx_ptr = mlx_init();
 	param->win_ptr =
 		mlx_new_window(param->mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGTH, W_NAME);
@@ -57,6 +71,7 @@ static void	mlx_setup(char *filename, t_param *param, t_colors *colors)
 	param->menu_ptr =
 		mlx_xpm_file_to_image(param->mlx_ptr, "menu.xpm", &endian, &bits);
 	param->mult = 1;
+	param->is_trs = 0;
 	param->s = (unsigned char*)
 		mlx_get_data_addr(param->img_ptr, &bits, &(param->size), &endian);
 }

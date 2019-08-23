@@ -6,13 +6,13 @@
 #    By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/02 22:26:26 by rjeor-mo          #+#    #+#              #
-#    Updated: 2019/08/19 23:14:47 by rjeor-mo         ###   ########.fr        #
+#    Updated: 2019/08/23 03:16:47 by rjeor-mo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fdf
 
-FLAGS = -Ofast -march=native -Wall -Wextra -Werror
+FLAGS = -O2 -march=native -Wall -Wextra -Werror
 
 LIBFT = -L libft/ -lft
 
@@ -20,8 +20,9 @@ MINILIB = -L minilibx_macos/ -lmlx
 
 FRAMEW = -framework OpenGL -framework Appkit
 
-CFILES = main.c primitives.c draw.c reader.c get_next_line.c image.c exit_msgs.c \
-		 screen.c zoom_shift.c screen2.c keyboard.c mouse.c menu.c transparent.c box.c draw_box.c colorize.c rotation.c
+CFILES = main.c dot.c draw.c reader.c get_next_line.c image.c exit_msgs.c \
+		 screen.c zoom_shift.c change_dots.c keyboard.c mouse.c \
+		 menu.c transparent.c box.c draw_box.c colorize.c color.c rotation.c
 
 OBJ = $(CFILES:%.c=%.o)
 

@@ -6,7 +6,7 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 21:01:22 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/08/19 23:05:05 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/08/23 02:42:52 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,14 +55,17 @@ typedef struct		s_param
 	void			*win_ptr;
 	void			*img_ptr;
 	void			*menu_ptr;
+
 	unsigned char	*s;
 	int				size;
+	int				file_size;
+
 	float			mult;
+	int				is_trs;
 	t_dot			*dot;
 	t_dot			*res;
 	t_box			*box;
 	t_colors		*clr;
-
 }					t_param;
 
 t_dot				*ft_reader(char *filename, t_colors *color);
@@ -74,6 +77,7 @@ void				add_dot(t_dot **dot, t_dot *new);
 void				free_dot(t_dot **dot);
 
 t_box				*create_box(t_param *param);
+void				change_trs(t_param *param, int is_trs);
 void				free_box(t_box **box);
 void				add_box(t_box **dot, t_box *new);
 void				sort_box(t_box *box);
@@ -89,6 +93,7 @@ void				inc_st_color(t_spec *c, t_spec *inc);
 void				get_spec(t_spec *s, unsigned int color);
 int					get_inc_n_maxp(t_dot *dot1,
 					t_dot *dot2, float *inc_x, float *inc_y);
+int					is_out_of_scr(t_dot *dot);
 
 void				tp_dot(t_param *param, char diag);
 void				net_dot_c(t_param *param);
@@ -105,7 +110,7 @@ void				ox_rot(t_dot *dot, float a);
 void				oy_rot(t_dot *dot, float a);
 void				oz_rot(t_dot *dot, float a);
 
-void				refresh_screen(t_param *param, int is_transp);
+void				refresh_screen(t_param *param);
 void				draw_menu(t_param *param, int color);
 
 int					mouse_f(int buttom, int x, int y, void *param);

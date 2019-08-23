@@ -6,7 +6,7 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/16 18:55:48 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/08/19 23:05:03 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/08/23 01:49:39 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	rot_net_dot(t_param *param, float angle, char axis)
 void	new_net_dot(t_param *param)
 {
 	param->mult = 1;
+	param->is_trs = 0;
 	free_dot(&param->dot);
 	param->dot = NULL;
 	ft_cpy(&(param->dot), param->res);

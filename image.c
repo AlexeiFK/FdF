@@ -6,7 +6,7 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/16 18:57:44 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/08/19 18:06:11 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/08/23 01:44:37 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,20 @@
 #include "libft.h"
 #include "config.h"
 
-void	refresh_screen(t_param *param, int is_trs)
+void	change_trs(t_param *param, int trs)
 {
-	if (is_trs == 0)
+	if (param->file_size < HIDEABLE_MAX)
+		param->is_trs = trs;
+}
+
+void	refresh_screen(t_param *param)
+{
+	if (param->is_trs == 0)
 		net_dot_c(param);
+	else if (param->is_trs == 1)
+		tp_dot(param, 0);
+	else if (param->is_trs == 2)
+		tp_dot(param, 1);
 	mlx_put_image_to_window(param->mlx_ptr,
 			param->win_ptr, param->img_ptr, 0, 0);
 	draw_menu(param, 0xffffff);

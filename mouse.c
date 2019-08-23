@@ -6,7 +6,7 @@
 /*   By: rjeor-mo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/16 22:00:20 by rjeor-mo          #+#    #+#             */
-/*   Updated: 2019/08/19 17:23:12 by rjeor-mo         ###   ########.fr       */
+/*   Updated: 2019/08/23 01:27:06 by rjeor-mo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void	menu_handler_ext(void *param, int x, int y)
 		rot_net_dot(param, SENS_ROT_M, 'z');
 }
 
-void		menu_handler(void *param, int x, int y, int *is_trs)
+void		menu_handler(void *param, int x, int y)
 {
 	menu_handler_ext(param, x, y);
 	if (x > 1 && x < 101 && y > 290 && y < 310)
@@ -47,24 +47,15 @@ void		menu_handler(void *param, int x, int y, int *is_trs)
 	if (x > 1 && x < 101 && y > 310 && y < 330)
 		new_net_dot(param);
 	if (x > 1 && x < 101 && y > 335 && y < 355)
-	{
-		*is_trs = 1;
-		tp_dot(param, 0);
-	}
+		change_trs(param, 1);
 	if (x > 1 && x < 101 && y > 355 && y < 375)
-	{
-		*is_trs = 1;
-		tp_dot(param, 1);
-	}
+		change_trs(param, 2);
 	if (x > 1 && x < 101 && y > 375 && y < 395)
 		free_and_exit(param);
 }
 
 int			mouse_f(int buttom, int x, int y, void *param)
 {
-	int		is_trs;
-
-	is_trs = 0;
 	if (buttom == 1)
 	{
 		if (x > 1 && x < 101 && y > 25 && y < 55)
@@ -79,12 +70,12 @@ int			mouse_f(int buttom, int x, int y, void *param)
 			zm_net_dot(param, SENS_ZOOM_IN, WINDOW_W_C, WINDOW_H_C);
 		if (x > 1 && x < 101 && y > 180 && y < 205)
 			zm_net_dot(param, SENS_ZOOM_OUT, WINDOW_W_C, WINDOW_H_C);
-		menu_handler(param, x, y, &is_trs);
+		menu_handler(param, x, y);
 	}
 	if (buttom == 4)
 		zm_net_dot(param, SENS_ZOOM_IN, x, y);
 	if (buttom == 5)
 		zm_net_dot(param, SENS_ZOOM_OUT, x, y);
-	refresh_screen(param, is_trs);
+	refresh_screen(param);
 	return (0);
 }
